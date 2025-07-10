@@ -1,0 +1,13 @@
+{
+  "cSpell.words": ["mixpanel", "pageview", "posthog"],
+  "workbench.colorTheme": "Default Dark+",
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.displayLanguage": "en",
+  "i18n-ally.namespace": true,
+  "i18n-ally.localesPaths": ["i18n/locales"],
+  "i18n-ally.pathMatcher": "{locale}/{namespaces}.json",
+  "editor.formatOnSave": true,
+  "[vue]": {
+    "editor.foldingStrategy": "auto"
+  }
+}
