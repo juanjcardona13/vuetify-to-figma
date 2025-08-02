@@ -18,6 +18,10 @@ export const toCapitalize = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
+export const objectIsEmpty = (obj: Record<string, unknown>) => {
+  return Object.keys(obj).length === 0;
+};
+
 // Función para generar todas las combinaciones posibles
 export const generateCombinations = (
   propsShowInPlayground: string[],
@@ -38,13 +42,13 @@ export const generateCombinations = (
     propList: string[],
     values: Record<string, unknown[]>
   ) => {
-    const result: Array<{ props: Record<string, unknown>; label: string }> = [];
+    const result: Array<{ props: Record<string, unknown>; label: { key?: string; value?: string } }> = [];
 
     // Función recursiva para generar combinaciones completas
     const combine = (
       currentProps: Record<string, unknown>,
       propIndex: number,
-      label: string
+      label: Record<string, string>
     ) => {
       if (propIndex === propList.length) {
         // Solo agregar si incluye todas las propiedades
@@ -61,14 +65,16 @@ export const generateCombinations = (
       propValues.forEach((value) => {
         const newProps = { ...currentProps, [currentProp]: value };
         const valueLabel = value === undefined ? "undefined" : String(value);
-        const newLabel = label
-          ? `${label}, ${currentProp}=${valueLabel}`
-          : `${currentProp}=${valueLabel}`;
+        const newLabel = objectIsEmpty(label)
+          ? {
+              [currentProp]: valueLabel,
+            }
+          : { ...label, [currentProp]: valueLabel };
         combine(newProps, propIndex + 1, newLabel);
       });
     };
 
-    combine({}, 0, "");
+    combine({}, 0, {});
     return result;
   };
 

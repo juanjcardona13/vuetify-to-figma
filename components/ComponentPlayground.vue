@@ -63,6 +63,7 @@ function movePropDown(index: number) {
 }
 
 const bgColorPlayground = ref("#ffffff");
+const tab = ref("properties");
 </script>
 
 <template>
@@ -104,9 +105,13 @@ const bgColorPlayground = ref("#ffffff");
                             size="small"
                           />
                         </template>
-                        <span>{{
-                          item.raw.supported ? "Is supported" : "Not supported"
-                        }}</span>
+                        <span>
+                          {{
+                            item.raw.supported
+                              ? "Is supported"
+                              : "Not supported"
+                          }}
+                        </span>
                       </VTooltip>
                     </div>
 
@@ -135,7 +140,10 @@ const bgColorPlayground = ref("#ffffff");
                           @click.stop
                         />
                       </div>
-                      <small v-if="item.raw.supported" class="ms-2 text-medium-emphasis">
+                      <small
+                        v-if="item.raw.supported"
+                        class="ms-2 text-medium-emphasis"
+                      >
                         Show in playground
                       </small>
                     </div>
@@ -369,7 +377,7 @@ const bgColorPlayground = ref("#ffffff");
                   :key="i"
                 >
                   <VCol :cols="numColumns">
-                    <VMenu open-on-hover>
+                    <VMenu open-on-hover :close-on-content-click="false">
                       <template #activator="{ props: menuBtnProps }">
                         <VSheet
                           v-bind="menuBtnProps"
@@ -385,9 +393,37 @@ const bgColorPlayground = ref("#ffffff");
                           <slot name="component" :combination="combination" />
                         </VSheet>
                       </template>
-                      <VList>
-                        <VListItem :title="combination.label" />
-                      </VList>
+                      <VCard>
+                        <VTabs v-model="tab">
+                          <VTab value="properties">Properties</VTab>
+                          <VTab value="layers">Layers</VTab>
+                        </VTabs>
+                        <VTabsWindow v-model="tab">
+                          <VTabsWindowItem value="properties">
+                            <VContainer class="elevation-1">
+                              <VRow>
+                                <VCol cols="12">
+                                  <h3 class="text-primary mb-2">Propiedades</h3>
+                                  <div>
+                                    <template
+                                      v-for="(value, key) of combination.label"
+                                      :key="key"
+                                    >
+                                      <div class="d-flex align-center">
+                                        <strong>{{ key }}&nbsp;=&nbsp;</strong>
+                                        <span>{{ value }}</span>
+                                      </div>
+                                    </template>
+                                  </div>
+                                </VCol>
+                              </VRow>
+                            </VContainer>
+                          </VTabsWindowItem>
+                          <VTabsWindowItem value="layers">
+                            123
+                          </VTabsWindowItem>
+                        </VTabsWindow>
+                      </VCard>
                     </VMenu>
                   </VCol>
                 </template>
