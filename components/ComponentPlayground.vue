@@ -6,11 +6,12 @@ interface Props {
   definitionsProps: Record<string, { howUse: string; values: unknown[] }>;
   ignoreProps?: string[];
   initialPropsToShow?: string[];
+  initialNumColumns?: number;
 }
 
 const props = defineProps<Props>();
 
-const numColumns = ref(2);
+const numColumns = ref(props.initialNumColumns || 2);
 const applyTheme = ref(true);
 const applyBorder = ref(false);
 
@@ -44,6 +45,24 @@ const getSelectedValues = (propKey: string): unknown[] => {
 const updateSelectedValues = (propKey: string, values: unknown[]): void => {
   selectedValuesByProp.value[propKey] = values;
 };
+
+function movePropUp(index: number) {
+  if (index > 0) {
+    const temp = propsShowInPlayground.value[index - 1];
+    propsShowInPlayground.value[index - 1] = propsShowInPlayground.value[index];
+    propsShowInPlayground.value[index] = temp;
+  }
+}
+
+function movePropDown(index: number) {
+  if (index < propsShowInPlayground.value.length - 1) {
+    const temp = propsShowInPlayground.value[index + 1];
+    propsShowInPlayground.value[index + 1] = propsShowInPlayground.value[index];
+    propsShowInPlayground.value[index] = temp;
+  }
+}
+
+const bgColorPlayground = ref("#ffffff");
 </script>
 
 <template>
@@ -57,7 +76,7 @@ const updateSelectedValues = (propKey: string, values: unknown[]): void => {
           :items-per-page="6"
         >
           <template #header>
-            <VTextField v-model="search" label="Search" />
+            <VTextField v-model="search" label="Search" clearable />
           </template>
           <template #default="{ items }">
             <VExpansionPanels variant="accordion" multiple>
@@ -65,6 +84,8 @@ const updateSelectedValues = (propKey: string, values: unknown[]): void => {
                 v-for="item in items"
                 :key="item.raw.name"
                 :readonly="!item.raw.supported"
+                :collapse-icon="item.raw.supported ? '$collapse' : ''"
+                :expand-icon="item.raw.supported ? '$expand' : ''"
               >
                 <template #title>
                   <div class="d-flex align-center justify-space-between w-100">
@@ -89,16 +110,34 @@ const updateSelectedValues = (propKey: string, values: unknown[]): void => {
                       </VTooltip>
                     </div>
 
-                    <div class="d-flex align-end flex-column justify-center me-2">
-                      <VSwitch
-                        v-model="propsShowInPlayground"
-                        :value="item.raw.key"
-                        color="primary"
-                        size="small"
-                        hide-details
-                        @click.stop
-                      />
-                      <small class="ms-2 text-medium-emphasis">Show in playground</small>
+                    <div
+                      class="d-flex align-end flex-column justify-center me-2"
+                    >
+                      <div class="d-flex align-center ga-2">
+                        <VSwitch
+                          v-if="
+                            item.raw.key === 'theme' &&
+                            propsShowInPlayground.includes(item.raw.key)
+                          "
+                          v-model="applyTheme"
+                          v-tooltip="
+                            'Aplicar el tema seleccionado al wrapper de los componentes'
+                          "
+                          color="success"
+                          hide-details
+                        />
+                        <VSwitch
+                          v-if="item.raw.supported"
+                          v-model="propsShowInPlayground"
+                          :value="item.raw.key"
+                          color="primary"
+                          hide-details
+                          @click.stop
+                        />
+                      </div>
+                      <small v-if="item.raw.supported" class="ms-2 text-medium-emphasis">
+                        Show in playground
+                      </small>
                     </div>
                   </div>
                 </template>
@@ -163,9 +202,11 @@ const updateSelectedValues = (propKey: string, values: unknown[]): void => {
               {{ componentPropsList.length }} elementos
             </p>
             <VPagination
-              :length="componentPropsList.length"
+              :length="paginationProps.pageCount"
               :model-value="paginationProps.page"
               show-first-last-page
+              size="small"
+              active-color="primary"
               @first="paginationProps.setPage(1)"
               @last="paginationProps.setPage(paginationProps.pageCount)"
               @next="(_value) => paginationProps.nextPage"
@@ -228,13 +269,6 @@ const updateSelectedValues = (propKey: string, values: unknown[]): void => {
               />
 
               <VSwitch
-                v-model="applyTheme"
-                label="Aplicar tema"
-                hint="Aplicar el tema seleccionado al wrapper de los componentes"
-                color="success"
-                persistent-hint
-              />
-              <VSwitch
                 v-model="applyBorder"
                 label="Aplicar borde"
                 hint="Aplicar un border al wrapper de los componentes"
@@ -245,40 +279,123 @@ const updateSelectedValues = (propKey: string, values: unknown[]): void => {
           </VCol>
         </VRow>
 
-        <!-- Combinaciones paginadas -->
-         <h6 v-if="paginatedCombinations.length > 0" class="text-h6">Playground</h6>
-         <VSheet v-if="paginatedCombinations.length > 0" dense :border="'sm'" rounded="lg">
-           <VRow dense>
-             <template v-for="(combination, i) in paginatedCombinations" :key="i">
-               <VCol :cols="numColumns">
-                 <VMenu open-on-hover>
-                   <template #activator="{ props: menuBtnProps }">
-                     <!-- Slot para el componente específico -->
-                     <VSheet
-                       v-bind="menuBtnProps"
-                       class="d-flex justify-center align-center pa-2 rounded-lg"
-                       :theme="
-                         applyTheme
-                           ? (combination.props.theme as string)
-                           : undefined
-                       "
-                       :border="applyBorder ? 'sm' : undefined"
-                     >
-                       <slot name="component" :combination="combination" />
-                     </VSheet>
-                   </template>
-                   <VList>
-                     <VListItem :title="combination.label" />
-                   </VList>
-                 </VMenu>
-               </VCol>
-             </template>
-           </VRow>
-         </VSheet>
+        <VRow dense>
+          <VCol cols="12" class="d-flex justify-end">
+            <VMenu>
+              <template #activator="{ props: menuBtnProps }">
+                <VBtn v-bind="menuBtnProps" icon="mdi-palette" />
+              </template>
+              <VSheet class="pa-2">
+                <VColorPicker v-model="bgColorPlayground" />
+              </VSheet>
+            </VMenu>
+          </VCol>
+          <VCol cols="2">
+            <h6 class="text-h6">Sort props</h6>
 
-        <!-- Mensaje cuando no hay combinaciones -->
-        <VRow v-else>
-          <VCol cols="12">
+            <VList>
+              <VListItem
+                v-for="(prop, index) in propsShowInPlayground"
+                :key="prop"
+                class="px-2 mb-1"
+                density="compact"
+                :border="'sm'"
+                :rounded="'lg'"
+              >
+                <div class="d-flex align-center">
+                  <VBtn
+                    icon="mdi-close"
+                    size="x-small"
+                    variant="text"
+                    color="error"
+                    class="me-1"
+                    @click.stop="
+                      propsShowInPlayground.splice(
+                        propsShowInPlayground.indexOf(prop),
+                        1
+                      )
+                    "
+                  />
+
+                  <div
+                    class="me-2 w-100"
+                    style="
+                      word-break: break-word;
+                      overflow: hidden;
+                      text-overflow: ellipsis;
+                      white-space: nowrap;
+                      display: inline-flex;
+                    "
+                  >
+                    <span v-tooltip="prop">
+                      {{ prop }}
+                    </span>
+                  </div>
+
+                  <VBtn
+                    icon="mdi-arrow-up"
+                    size="16"
+                    style="font-size: 12px"
+                    variant="text"
+                    :disabled="index === 0"
+                    class="mx-1"
+                    @click="movePropUp(index)"
+                  />
+                  <VBtn
+                    icon="mdi-arrow-down"
+                    size="16"
+                    style="font-size: 12px"
+                    variant="text"
+                    :disabled="index === propsShowInPlayground.length - 1"
+                    class="mx-1"
+                    @click="movePropDown(index)"
+                  />
+                </div>
+              </VListItem>
+            </VList>
+          </VCol>
+          <!-- Combinaciones paginadas -->
+          <VCol v-if="paginatedCombinations.length > 0" cols="10">
+            <h6 class="text-h6 mb-2">Playground</h6>
+            <VSheet
+              dense
+              :border="'sm'"
+              rounded="lg"
+              :color="bgColorPlayground"
+            >
+              <VRow dense>
+                <template
+                  v-for="(combination, i) in paginatedCombinations"
+                  :key="i"
+                >
+                  <VCol :cols="numColumns">
+                    <VMenu open-on-hover>
+                      <template #activator="{ props: menuBtnProps }">
+                        <VSheet
+                          v-bind="menuBtnProps"
+                          class="d-flex justify-center align-center pa-2 rounded-lg"
+                          :theme="
+                            applyTheme
+                              ? (combination.props.theme as string)
+                              : undefined
+                          "
+                          :border="applyBorder ? 'sm' : undefined"
+                          :color="applyTheme ? undefined : bgColorPlayground"
+                        >
+                          <slot name="component" :combination="combination" />
+                        </VSheet>
+                      </template>
+                      <VList>
+                        <VListItem :title="combination.label" />
+                      </VList>
+                    </VMenu>
+                  </VCol>
+                </template>
+              </VRow>
+            </VSheet>
+          </VCol>
+          <!-- Mensaje cuando no hay combinaciones -->
+          <VCol v-else cols="12">
             <VAlert type="info" variant="tonal">
               No hay combinaciones para mostrar. Selecciona al menos una
               propiedad en el panel izquierdo.

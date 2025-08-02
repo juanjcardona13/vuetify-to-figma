@@ -1,14 +1,5 @@
 <script setup lang="ts">
-import type { VBtnSlots } from "vuetify/lib/components/VBtn/VBtn.mjs";
-import { VBtn } from "vuetify/components/VBtn";
-
-const slots: Array<keyof VBtnSlots> = [
-  "append",
-  "default",
-  "prepend",
-  "loader",
-];
-console.log(slots);
+import { VAvatar } from "vuetify/components/VAvatar";
 
 const ignoreProps = [
   "_as",
@@ -77,7 +68,7 @@ const definitionsProps: Record<string, { howUse: string; values: unknown[] }> =
     text: {
       howUse:
         "In direct properties, search for 'text' and write the value you want to use",
-      values: ["button"],
+      values: ["JC"],
     },
     height: {
       howUse: "Figma native",
@@ -155,13 +146,13 @@ const definitionsProps: Record<string, { howUse: string; values: unknown[] }> =
 
 <template>
   <ComponentPlayground
-    :component-props="VBtn.props"
+    :component-props="VAvatar.props"
     :definitions-props="definitionsProps"
     :ignore-props="ignoreProps"
     :initial-props-to-show="['text']"
   >
     <template #component="{ combination }">
-      <VBtn v-bind="{ ...combination.props }" />
+      <VAvatar v-bind="{ ...combination.props }" />
     </template>
   </ComponentPlayground>
 </template>

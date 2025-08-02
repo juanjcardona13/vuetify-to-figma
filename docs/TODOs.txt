@@ -1,0 +1,7 @@
+1. Poner un panel donde podras controlar los foundations td Vuetify
+   - Color
+   - Typography
+   - Iconography
+   - Layout - Grid - Spacing - Breakpoints
+   - Border - Radius, Width, Color, Opacity
+   - Elevation

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { VBtnSlots } from "vuetify/lib/components/VBtn/VBtn.mjs";
-import { VBtn } from "vuetify/components/VBtn";
+import type { VCardSlots } from "vuetify/lib/components/VCard/VCard.mjs";
+import { VCard } from "vuetify/components/VCard";
 
-const slots: Array<keyof VBtnSlots> = [
+const slots: Array<keyof VCardSlots> = [
   "append",
   "default",
   "prepend",
@@ -77,7 +77,7 @@ const definitionsProps: Record<string, { howUse: string; values: unknown[] }> =
     text: {
       howUse:
         "In direct properties, search for 'text' and write the value you want to use",
-      values: ["button"],
+      values: ["Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!"],
     },
     height: {
       howUse: "Figma native",
@@ -155,13 +155,13 @@ const definitionsProps: Record<string, { howUse: string; values: unknown[] }> =
 
 <template>
   <ComponentPlayground
-    :component-props="VBtn.props"
+    :component-props="VCard.props"
     :definitions-props="definitionsProps"
     :ignore-props="ignoreProps"
     :initial-props-to-show="['text']"
   >
     <template #component="{ combination }">
-      <VBtn v-bind="{ ...combination.props }" />
+      <VCard v-bind="{ ...combination.props }" />
     </template>
   </ComponentPlayground>
 </template>
