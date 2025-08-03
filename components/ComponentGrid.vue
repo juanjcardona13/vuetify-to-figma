@@ -98,10 +98,7 @@ const extractedLayers = ref<LayerInfo[]>([]);
 provide("extractedLayers", extractedLayers);
 
 // Función que se ejecuta cuando se hace clic en el tab Layers
-const handleLayersTabClick = (
-  combination: Record<string, unknown>,
-  index: number
-) => {
+const handleLayersTabClick = (index: number) => {
   // Buscar el elemento del slot en el DOM usando el índice
   const slotElement = document.querySelector(
     `[data-combination="combination-${index}"]`
@@ -142,10 +139,7 @@ const handleLayersTabClick = (
               <VCard>
                 <VTabs v-model="tab">
                   <VTab value="properties">Properties</VTab>
-                  <VTab
-                    value="layers"
-                    @click="handleLayersTabClick(combination, i)"
-                  >
+                  <VTab value="layers" @click="handleLayersTabClick(i)">
                     Layers
                   </VTab>
                 </VTabs>

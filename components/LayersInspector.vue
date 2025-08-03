@@ -91,9 +91,6 @@ const getLayerIcon = (tagName: string): string => {
                       ({{ layer.className }})
                     </span>
                   </span>
-                  <VChip size="x-small" color="primary" class="ms-auto">
-                    Profundidad: {{ layer.depth }}
-                  </VChip>
                 </div>
               </template>
               <template #text>
