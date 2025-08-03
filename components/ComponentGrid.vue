@@ -1,19 +1,22 @@
 <script setup lang="ts">
 const bgColorPlayground = inject("bgColorPlayground", ref("#FFFFFF"));
-const paginatedCombinations = inject("paginatedCombinations", ref<{
-    props: Record<string, unknown>;
-    label: {
+const paginatedCombinations = inject(
+  "paginatedCombinations",
+  ref<
+    {
+      props: Record<string, unknown>;
+      label: {
         key?: string;
         value?: string;
-    };
-}[]>([]));
+      };
+    }[]
+  >([])
+);
 const numColumns = inject("numColumns", ref(2));
 const applyTheme = inject("applyTheme", ref(true));
 const applyBorder = inject("applyBorder", ref(false));
 
-
 const tab = ref("properties");
-
 
 // Interfaz para las capas extraídas
 interface LayerInfo {
