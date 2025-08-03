@@ -5,10 +5,7 @@ const paginatedCombinations = inject(
   ref<
     {
       props: Record<string, unknown>;
-      label: {
-        key?: string;
-        value?: string;
-      };
+      label: { key?: string; value?: string };
     }[]
   >([])
 );
@@ -16,86 +13,108 @@ const numColumns = inject("numColumns", ref(2));
 const applyTheme = inject("applyTheme", ref(true));
 const applyBorder = inject("applyBorder", ref(false));
 
-const tab = ref("properties");
+const tab = ref("layers");
 
-// Interfaz para las capas extraídas
 interface LayerInfo {
+  id: string;
   tagName: string;
   className: string;
-  id: string;
-  textContent: string;
-  depth: number;
-  styles: {
-    display: string;
-    position: string;
-    width: string;
-    height: string;
-    backgroundColor: string;
-    color: string;
+  textContent: {
+    text: string;
     fontSize: string;
     fontWeight: string;
+    lineHeight: string;
+    letterSpacing: string;
+    color: string;
+  };
+  styles: {
+    position: string;
+    display: string;
     margin: string;
     padding: string;
+    gap: string;
+    flexDirection: string;
+    width: string;
+    minWidth: string;
+    maxWidth: string;
+    height: string;
+    minHeight: string;
+    maxHeight: string;
+    alignItems: string;
+    justifyContent: string;
+    opacity: string;
     border: string;
     borderRadius: string;
+    background: string;
+    color: string;
     boxShadow: string;
     zIndex: string;
   };
-  attributes: Array<{ name: string; value: string }>;
   children: LayerInfo[];
 }
 
-// Función para extraer las capas del elemento
-const extractLayers = (element: HTMLElement): LayerInfo[] => {
-  const layers: LayerInfo[] = [];
+function getDomAsJson(element: HTMLElement): LayerInfo {
+  // Obtener estilos computados una sola vez por elemento
+  const computedStyle: CSSStyleDeclaration = window.getComputedStyle(element);
 
-  function traverseElement(el: HTMLElement, depth: number = 0) {
-    const layer: LayerInfo = {
-      tagName: el.tagName.toLowerCase(),
-      className: el.className,
-      id: el.id,
-      textContent: el.textContent?.trim() || "",
-      depth,
-      styles: {
-        display: getComputedStyle(el).display,
-        position: getComputedStyle(el).position,
-        width: getComputedStyle(el).width,
-        height: getComputedStyle(el).height,
-        backgroundColor: getComputedStyle(el).backgroundColor,
-        color: getComputedStyle(el).color,
-        fontSize: getComputedStyle(el).fontSize,
-        fontWeight: getComputedStyle(el).fontWeight,
-        margin: getComputedStyle(el).margin,
-        padding: getComputedStyle(el).padding,
-        border: getComputedStyle(el).border,
-        borderRadius: getComputedStyle(el).borderRadius,
-        boxShadow: getComputedStyle(el).boxShadow,
-        zIndex: getComputedStyle(el).zIndex,
-      },
-      attributes: Array.from(el.attributes).map((attr) => ({
-        name: attr.name,
-        value: attr.value,
-      })),
-      children: [],
-    };
-
-    layers.push(layer);
-
-    // Recorrer elementos hijos
-    for (let i = 0; i < el.children.length; i++) {
-      const child = el.children[i] as HTMLElement;
-      traverseElement(child, depth + 1);
+  // Obtener solo el texto directo del elemento (excluyendo texto de hijos)
+  let directText: string = "";
+  for (const node of Array.from(element.childNodes)) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      directText += (node.textContent ?? "").trim();
     }
   }
 
-  traverseElement(element);
-  return layers;
-};
+  // Construir el objeto JSON
+  const result: LayerInfo = {
+    id: element.id || "",
+    tagName: element.tagName,
+    className: element.className || "",
+    textContent: {
+      text: directText,
+      fontSize: computedStyle.fontSize,
+      fontWeight: computedStyle.fontWeight,
+      lineHeight: computedStyle.lineHeight,
+      letterSpacing: computedStyle.letterSpacing,
+      color: computedStyle.color,
+    },
+    styles: {
+      position: computedStyle.position,
+      display: computedStyle.display,
+      margin: computedStyle.margin,
+      padding: computedStyle.padding,
+      gap: computedStyle.gap,
+      flexDirection: computedStyle.flexDirection,
+      width: computedStyle.width,
+      minWidth: computedStyle.minWidth,
+      maxWidth: computedStyle.maxWidth,
+      height: computedStyle.height,
+      minHeight: computedStyle.minHeight,
+      maxHeight: computedStyle.maxHeight,
+      alignItems: computedStyle.alignItems,
+      justifyContent: computedStyle.justifyContent,
+      opacity: computedStyle.opacity,
+      border: computedStyle.border,
+      borderRadius: computedStyle.borderRadius,
+      background: computedStyle.background,
+      color: computedStyle.color,
+      boxShadow: computedStyle.boxShadow,
+      zIndex: computedStyle.zIndex,
+    },
+    children: [],
+  };
 
+  // Recorrer hijos solo si son elementos
+  for (const child of Array.from(element.children) as HTMLElement[]) {
+    result.children.push(getDomAsJson(child));
+  }
+
+  return result;
+}
 // Estado para almacenar las capas extraídas
-const extractedLayers = ref<LayerInfo[]>([]);
+const extractedLayer = ref<LayerInfo>();
 
-provide("extractedLayers", extractedLayers);
+provide("extractedLayer", extractedLayer);
 
 // Función que se ejecuta cuando se hace clic en el tab Layers
 const handleLayersTabClick = (index: number) => {
@@ -104,13 +123,11 @@ const handleLayersTabClick = (index: number) => {
     `[data-combination="combination-${index}"]`
   );
   if (slotElement) {
-    const layers = extractLayers(slotElement as HTMLElement);
-    console.log("Layers extracted:", layers);
-    extractedLayers.value = layers;
-    return layers;
+    extractedLayer.value = getDomAsJson(slotElement as HTMLElement);
+    return extractedLayer.value;
   }
-  extractedLayers.value = [];
-  return [];
+  extractedLayer.value = undefined;
+  return undefined;
 };
 </script>
 
@@ -121,7 +138,11 @@ const handleLayersTabClick = (index: number) => {
       <VRow dense>
         <template v-for="(combination, i) in paginatedCombinations" :key="i">
           <VCol :cols="numColumns">
-            <VMenu open-on-hover :close-on-content-click="false">
+            <VMenu
+              open-on-hover
+              :close-on-content-click="false"
+              :model-value="true"
+            >
               <template #activator="{ props: menuBtnProps }">
                 <VSheet
                   v-bind="menuBtnProps"

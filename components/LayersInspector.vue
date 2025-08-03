@@ -1,31 +1,47 @@
 <script setup lang="ts">
 interface LayerInfo {
+  id: string;
   tagName: string;
   className: string;
-  id: string;
-  textContent: string;
-  depth: number;
-  styles: {
-    display: string;
-    position: string;
-    width: string;
-    height: string;
-    backgroundColor: string;
-    color: string;
+  textContent: {
+    text: string;
     fontSize: string;
     fontWeight: string;
+    lineHeight: string;
+    letterSpacing: string;
+    color: string;
+  };
+  styles: {
+    position: string;
+    display: string;
     margin: string;
     padding: string;
+    gap: string;
+    flexDirection: string;
+    width: string;
+    minWidth: string;
+    maxWidth: string;
+    height: string;
+    minHeight: string;
+    maxHeight: string;
+    alignItems: string;
+    justifyContent: string;
+    opacity: string;
     border: string;
     borderRadius: string;
+    background: string;
+    color: string;
     boxShadow: string;
     zIndex: string;
   };
-  attributes: Array<{ name: string; value: string }>;
   children: LayerInfo[];
 }
 
-const extractedLayers = inject("extractedLayers", ref<LayerInfo[]>([]));
+const extractedLayer = inject("extractedLayer", ref<LayerInfo>());
+
+const camelToKebab = (str: string): string => {
+  return str.replace(/([A-Z])/g, "-$1").toLowerCase();
+};
 
 // Función para obtener el icono según el tipo de elemento
 const getLayerIcon = (tagName: string): string => {
@@ -69,73 +85,59 @@ const getLayerIcon = (tagName: string): string => {
     <VRow>
       <VCol cols="12">
         <h3 class="text-primary mb-2">Capas del Componente</h3>
-        <div v-if="extractedLayers.length > 0">
+        <div v-if="extractedLayer">
           <VExpansionPanels variant="accordion">
-            <VExpansionPanel
-              v-for="(layer, index) in extractedLayers"
-              :key="index"
-            >
+            <VExpansionPanel>
               <template #title>
                 <div class="d-flex align-center">
                   <VIcon
-                    :icon="getLayerIcon(layer.tagName)"
+                    :icon="getLayerIcon(extractedLayer.tagName)"
                     class="me-2"
                     size="small"
                   />
                   <span class="font-weight-medium">
-                    {{ layer.tagName }}
+                    {{ extractedLayer.tagName }}
                     <span
-                      v-if="layer.className"
+                      v-if="extractedLayer.className"
                       class="text-caption text-medium-emphasis"
                     >
-                      ({{ layer.className }})
+                      ({{ extractedLayer.className }})
                     </span>
                   </span>
                 </div>
               </template>
               <template #text>
                 <div class="pa-2">
-                  <div v-if="layer.textContent" class="mb-2">
+                  <div v-if="extractedLayer.textContent.text" class="mb-2">
                     <strong>Contenido:</strong>
-                    {{ layer.textContent }}
+                    {{ extractedLayer.textContent.text }}
                   </div>
 
-                  <div v-if="layer.id" class="mb-2">
+                  <div v-if="extractedLayer.id" class="mb-2">
                     <strong>ID:</strong>
-                    {{ layer.id }}
+                    {{ extractedLayer.id }}
                   </div>
 
                   <div class="mb-2">
                     <strong>Estilos:</strong>
-                    <VList density="compact">
-                      <VListItem
-                        v-for="(value, key) in layer.styles"
+
+                    <div class="d-flex flex-wrap">
+                      <template
+                        v-for="(value, key) in extractedLayer.styles"
                         :key="key"
-                        class="pa-1"
                       >
-                        <div class="d-flex justify-space-between">
-                          <span class="text-caption">{{ key }}:</span>
-                          <span class="text-caption">{{ value }}</span>
-                        </div>
-                      </VListItem>
-                    </VList>
+                        <VChip
+                          :text="`${camelToKebab(key)}: ${value}`"
+                          size="x-small"
+                          class="border mb-1"
+                          :variant="'text'"
+                        />
+                        <VDivider vertical class="ma-1" />
+                      </template>
+                    </div>
                   </div>
 
-                  <div v-if="layer.attributes.length > 0" class="mb-2">
-                    <strong>Atributos:</strong>
-                    <VList density="compact">
-                      <VListItem
-                        v-for="attr in layer.attributes"
-                        :key="attr.name"
-                        class="pa-1"
-                      >
-                        <div class="d-flex justify-space-between">
-                          <span class="text-caption">{{ attr.name }}:</span>
-                          <span class="text-caption">{{ attr.value }}</span>
-                        </div>
-                      </VListItem>
-                    </VList>
-                  </div>
+                  <!-- Children -->
                 </div>
               </template>
             </VExpansionPanel>
