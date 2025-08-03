@@ -119,18 +119,15 @@ const definitionsProps: Record<string, { howUse: string; values: unknown[] }> =
     size: {
       howUse:
         "In 'Appearance' click in 'Apply variable mode' select 'Size' and then select the value you want to use",
-      values: [ "x-small", "small", "default", "large", "x-large"],
+      values: ["x-small", "small", "default", "large", "x-large"],
     },
     density: {
       howUse: "In direct properties, search for 'density'",
-      values: [  "compact", "comfortable", "default",],
+      values: ["compact", "comfortable", "default"],
     },
     stacked: {
       howUse: "In direct properties, search for 'stacked'",
-      values: [
-        true, 
-        false
-      ],
+      values: [true, false],
     },
     theme: {
       howUse:
@@ -155,6 +152,7 @@ const definitionsProps: Record<string, { howUse: string; values: unknown[] }> =
 
 <template>
   <ComponentPlayground
+    :component-name="'v-btn'"
     :component-props="VBtn.props"
     :definitions-props="definitionsProps"
     :ignore-props="ignoreProps"

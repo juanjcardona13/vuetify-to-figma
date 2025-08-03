@@ -1,6 +1,6 @@
 <script setup lang="ts">
-
 const props = defineProps<{
+  componentName: string;
   componentProps: Record<string, { default?: string | undefined }>;
   definitionsProps: Record<string, { howUse: string; values: unknown[] }>;
   ignoreProps?: string[];
@@ -78,7 +78,7 @@ provide("applyBorder", applyBorder);
             <PropsSorter />
           </VCol>
           <VCol v-if="paginatedCombinations.length > 0" cols="10">
-            <ComponentGrid>
+            <ComponentGrid :component-name="componentName">
               <template #component="{ combination }">
                 <slot name="component" :combination="combination" />
               </template>

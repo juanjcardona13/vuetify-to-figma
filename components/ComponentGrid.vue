@@ -1,4 +1,8 @@
 <script setup lang="ts">
+const props = defineProps<{
+  componentName: string;
+}>();
+
 const bgColorPlayground = inject("bgColorPlayground", ref("#FFFFFF"));
 const paginatedCombinations = inject(
   "paginatedCombinations",
@@ -13,47 +17,31 @@ const numColumns = inject("numColumns", ref(2));
 const applyTheme = inject("applyTheme", ref(true));
 const applyBorder = inject("applyBorder", ref(false));
 
-const tab = ref("layers");
+const tab = ref("properties");
 
-interface LayerInfo {
-  id: string;
-  tagName: string;
-  className: string;
-  textContent: {
-    text: string;
-    fontSize: string;
-    fontWeight: string;
-    lineHeight: string;
-    letterSpacing: string;
-    color: string;
-  };
-  styles: {
-    position: string;
-    display: string;
-    margin: string;
-    padding: string;
-    gap: string;
-    flexDirection: string;
-    width: string;
-    minWidth: string;
-    maxWidth: string;
-    height: string;
-    minHeight: string;
-    maxHeight: string;
-    alignItems: string;
-    justifyContent: string;
-    opacity: string;
-    border: string;
-    borderRadius: string;
-    background: string;
-    color: string;
-    boxShadow: string;
-    zIndex: string;
-  };
-  children: LayerInfo[];
-}
+const getFigmaLayerName = (element: HTMLElement) => {
+  const className = element.className;
+  const classNameArray = className.split(" ");
+  if (classNameArray.length === 1) {
+    return className.replace(`${props.componentName}__`, "");
+  }
+  return classNameArray[1];
+};
 
-function getDomAsJson(element: HTMLElement): LayerInfo {
+const getVuetifyComponentName = (element: HTMLElement) => {
+  const className = element.className;
+  if (typeof className === "string") {
+    const classNameArray = className.split(" ");
+    return (
+      classNameArray.find((className) =>
+        ALL_COMPONENTS_NAME.includes(className)
+      ) || ""
+    );
+  }
+  return "";
+};
+
+function getDomAsJson(element: HTMLElement, figmaLayerName: string): LayerInfo {
   // Obtener estilos computados una sola vez por elemento
   const computedStyle: CSSStyleDeclaration = window.getComputedStyle(element);
 
@@ -68,7 +56,9 @@ function getDomAsJson(element: HTMLElement): LayerInfo {
   // Construir el objeto JSON
   const result: LayerInfo = {
     id: element.id || "",
-    tagName: element.tagName,
+    isVuetifyComponent: false,
+    tagName: element.tagName.toLowerCase(),
+    figmaLayerName,
     className: element.className || "",
     textContent: {
       text: directText,
@@ -106,24 +96,32 @@ function getDomAsJson(element: HTMLElement): LayerInfo {
 
   // Recorrer hijos solo si son elementos
   for (const child of Array.from(element.children) as HTMLElement[]) {
-    result.children.push(getDomAsJson(child));
+    if (getVuetifyComponentName(child)) {
+      result.children.push({
+        figmaLayerName: kebabToPascal(getVuetifyComponentName(child)),
+        isVuetifyComponent: true,
+        tagName: child.tagName.toLowerCase(),
+        children: [],
+      });
+    } else {
+      result.children.push(getDomAsJson(child, getFigmaLayerName(child)));
+    }
   }
 
   return result;
 }
-// Estado para almacenar las capas extraídas
+
 const extractedLayer = ref<LayerInfo>();
 
-provide("extractedLayer", extractedLayer);
-
-// Función que se ejecuta cuando se hace clic en el tab Layers
 const handleLayersTabClick = (index: number) => {
-  // Buscar el elemento del slot en el DOM usando el índice
   const slotElement = document.querySelector(
     `[data-combination="combination-${index}"]`
   );
   if (slotElement) {
-    extractedLayer.value = getDomAsJson(slotElement as HTMLElement);
+    extractedLayer.value = getDomAsJson(
+      slotElement.children[0] as HTMLElement,
+      props.componentName
+    );
     return extractedLayer.value;
   }
   extractedLayer.value = undefined;
@@ -138,11 +136,7 @@ const handleLayersTabClick = (index: number) => {
       <VRow dense>
         <template v-for="(combination, i) in paginatedCombinations" :key="i">
           <VCol :cols="numColumns">
-            <VMenu
-              open-on-hover
-              :close-on-content-click="false"
-              :model-value="true"
-            >
+            <VMenu open-on-hover :close-on-content-click="false">
               <template #activator="{ props: menuBtnProps }">
                 <VSheet
                   v-bind="menuBtnProps"
@@ -169,7 +163,10 @@ const handleLayersTabClick = (index: number) => {
                     <PropertiesInspector :combination="combination" />
                   </VTabsWindowItem>
                   <VTabsWindowItem value="layers">
-                    <LayersInspector />
+                    <LayersInspector
+                      v-if="extractedLayer"
+                      :extracted-layer="extractedLayer"
+                    />
                   </VTabsWindowItem>
                 </VTabsWindow>
               </VCard>

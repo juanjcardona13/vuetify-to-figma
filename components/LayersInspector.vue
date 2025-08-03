@@ -1,50 +1,17 @@
 <script setup lang="ts">
-interface LayerInfo {
-  id: string;
-  tagName: string;
-  className: string;
-  textContent: {
-    text: string;
-    fontSize: string;
-    fontWeight: string;
-    lineHeight: string;
-    letterSpacing: string;
-    color: string;
-  };
-  styles: {
-    position: string;
-    display: string;
-    margin: string;
-    padding: string;
-    gap: string;
-    flexDirection: string;
-    width: string;
-    minWidth: string;
-    maxWidth: string;
-    height: string;
-    minHeight: string;
-    maxHeight: string;
-    alignItems: string;
-    justifyContent: string;
-    opacity: string;
-    border: string;
-    borderRadius: string;
-    background: string;
-    color: string;
-    boxShadow: string;
-    zIndex: string;
-  };
-  children: LayerInfo[];
-}
-
-const extractedLayer = inject("extractedLayer", ref<LayerInfo>());
+defineProps<{
+  extractedLayer: LayerInfo;
+}>();
 
 const camelToKebab = (str: string): string => {
   return str.replace(/([A-Z])/g, "-$1").toLowerCase();
 };
 
 // Función para obtener el icono según el tipo de elemento
-const getLayerIcon = (tagName: string): string => {
+const getLayerIcon = (
+  tagName: string,
+  isVuetifyComponent?: boolean
+): string => {
   const iconMap: Record<string, string> = {
     div: "mdi-square-outline",
     span: "mdi-text",
@@ -76,77 +43,107 @@ const getLayerIcon = (tagName: string): string => {
     h6: "mdi-format-header-6",
   };
 
-  return iconMap[tagName] || "mdi-tag";
+  return isVuetifyComponent ? "$vuetify" : iconMap[tagName] || "mdi-tag";
 };
 </script>
 
 <template>
-  <VContainer class="elevation-1">
-    <VRow>
-      <VCol cols="12">
-        <h3 class="text-primary mb-2">Capas del Componente</h3>
-        <div v-if="extractedLayer">
-          <VExpansionPanels variant="accordion">
+  <VSheet
+    v-if="extractedLayer.isVuetifyComponent"
+    color="blue-lighten-3"
+    rounded="lg"
+    class="px-2 py-3"
+  >
+    <VIcon icon="$vuetify" size="small" class="me-2" />
+    <span class="font-weight-medium">
+      {{ extractedLayer.figmaLayerName }}
+    </span>
+  </VSheet>
+
+  <VExpansionPanels v-else :color="'grey-lighten-3'" elevation="0">
+    <VExpansionPanel>
+      <template #title>
+        <div class="d-flex align-center">
+          <VIcon
+            :icon="
+              getLayerIcon(
+                extractedLayer.tagName,
+                extractedLayer.isVuetifyComponent
+              )
+            "
+            class="me-2"
+            size="small"
+          />
+          <span class="font-weight-medium">
+            {{ extractedLayer.figmaLayerName }}
+            <span
+              v-if="extractedLayer.className"
+              class="text-caption text-medium-emphasis"
+            >
+              ({{ extractedLayer.className }})
+            </span>
+          </span>
+        </div>
+      </template>
+      <VExpansionPanelText class="border">
+        <div class="pa-2" style="max-width: 800px">
+          <VExpansionPanels elevation="0" class="mb-2 border">
             <VExpansionPanel>
-              <template #title>
-                <div class="d-flex align-center">
-                  <VIcon
-                    :icon="getLayerIcon(extractedLayer.tagName)"
-                    class="me-2"
-                    size="small"
-                  />
-                  <span class="font-weight-medium">
-                    {{ extractedLayer.tagName }}
-                    <span
-                      v-if="extractedLayer.className"
-                      class="text-caption text-medium-emphasis"
+              <VExpansionPanelTitle>Texto y estilos</VExpansionPanelTitle>
+              <VExpansionPanelText>
+                <VDivider class="mb-2" />
+                <div v-if="extractedLayer.textContent?.text" class="mb-2">
+                  <strong>Texto:</strong>
+
+                  <div class="d-flex flex-wrap">
+                    <template
+                      v-for="(value, key) in extractedLayer.textContent"
+                      :key="key"
                     >
-                      ({{ extractedLayer.className }})
-                    </span>
-                  </span>
+                      <VChip
+                        :text="`${camelToKebab(key)}: ${value}`"
+                        size="x-small"
+                        class="border mb-1"
+                        :variant="key === 'text' ? 'flat' : 'text'"
+                      />
+                      <VDivider vertical class="ma-1" />
+                    </template>
+                  </div>
                 </div>
-              </template>
-              <template #text>
-                <div class="pa-2">
-                  <div v-if="extractedLayer.textContent.text" class="mb-2">
-                    <strong>Contenido:</strong>
-                    {{ extractedLayer.textContent.text }}
+
+                <div class="mb-2">
+                  <strong>Estilos:</strong>
+
+                  <div class="d-flex flex-wrap">
+                    <template
+                      v-for="(value, key) in extractedLayer.styles"
+                      :key="key"
+                    >
+                      <VChip
+                        :text="`${camelToKebab(key)}: ${value}`"
+                        size="x-small"
+                        class="border mb-1"
+                        :variant="'text'"
+                      />
+                      <VDivider vertical class="ma-1" />
+                    </template>
                   </div>
-
-                  <div v-if="extractedLayer.id" class="mb-2">
-                    <strong>ID:</strong>
-                    {{ extractedLayer.id }}
-                  </div>
-
-                  <div class="mb-2">
-                    <strong>Estilos:</strong>
-
-                    <div class="d-flex flex-wrap">
-                      <template
-                        v-for="(value, key) in extractedLayer.styles"
-                        :key="key"
-                      >
-                        <VChip
-                          :text="`${camelToKebab(key)}: ${value}`"
-                          size="x-small"
-                          class="border mb-1"
-                          :variant="'text'"
-                        />
-                        <VDivider vertical class="ma-1" />
-                      </template>
-                    </div>
-                  </div>
-
-                  <!-- Children -->
                 </div>
-              </template>
+              </VExpansionPanelText>
             </VExpansionPanel>
           </VExpansionPanels>
+
+          <!-- Children -->
+          <template v-if="extractedLayer.children?.length > 0">
+            <div class="mb-2 font-weight-bold">
+              Hijos ({{ extractedLayer.children.length }})
+            </div>
+            <template v-for="child in extractedLayer.children" :key="child.id">
+              <LayersInspector class="mb-2" :extracted-layer="child" />
+            </template>
+          </template>
         </div>
-        <VAlert v-else type="info" variant="tonal" class="mt-2">
-          Haz clic en el tab "Layers" para extraer las capas del componente.
-        </VAlert>
-      </VCol>
-    </VRow>
-  </VContainer>
+      </VExpansionPanelText>
+    </VExpansionPanel>
+  </VExpansionPanels>
 </template>
