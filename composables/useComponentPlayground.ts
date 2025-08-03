@@ -3,7 +3,6 @@ import type { ComputedRef } from 'vue';
 import { toCapitalize, generateCombinations } from '../utils/index';
 import type { ComponentProps } from '../utils/index';
 
-// Composable para la lógica común de playground de componentes
 export function useComponentPlayground(
   componentProps: Record<string, { default?: string | undefined }>,
   definitionsProps: Record<string, { howUse: string; values: unknown[] }>,
@@ -19,7 +18,6 @@ export function useComponentPlayground(
   const supportedProps = Object.keys(definitionsProps);
   const props: Array<ComponentProps> = [];
 
-  // Construir props desde el componente
   for (const prop in componentProps) {
     if (!ignoreProps.includes(prop)) {
       props.push({
@@ -32,26 +30,20 @@ export function useComponentPlayground(
     }
   }
 
-  // Ordenar props: soportadas primero (ordenadas alfabéticamente), luego no soportadas (ordenadas alfabéticamente)
   props.sort((a, b) => {
-    // Si ambas son soportadas o ambas no son soportadas, ordenar alfabéticamente
     if (a.supported === b.supported) {
       return a.name.localeCompare(b.name);
     }
-    // Si una es soportada y la otra no, la soportada va primero
     return a.supported ? -1 : 1;
   });
 
   const allCombinations = computed(() => {
-    // Crear un objeto con los valores seleccionados para cada prop
     const selectedDefinitionsProps: Record<string, { values: unknown[] }> = {};
-    
     propsShowInPlayground.value.forEach(prop => {
       const selectedValues = selectedValuesByProp.value[prop];
       if (selectedValues && selectedValues.length > 0) {
         selectedDefinitionsProps[prop] = { values: selectedValues };
       } else if (definitionsProps[prop]) {
-        // Si no hay valores seleccionados, usar todos los valores disponibles
         selectedDefinitionsProps[prop] = { values: definitionsProps[prop].values };
       }
     });

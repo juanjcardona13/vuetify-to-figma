@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 const props = defineProps<{
   componentProps: Record<string, { default?: string | undefined }>;
   definitionsProps: Record<string, { howUse: string; values: unknown[] }>;
@@ -6,11 +7,11 @@ const props = defineProps<{
   initialPropsToShow?: string[];
   initialNumColumns?: number;
 }>();
+
 const bgColorPlayground = ref("#ffffff");
 const numColumns = ref(props.initialNumColumns || 2);
 const applyTheme = ref(true);
 const applyBorder = ref(false);
-
 const selectedValuesByProp = ref<Record<string, unknown[]>>({});
 
 const {
