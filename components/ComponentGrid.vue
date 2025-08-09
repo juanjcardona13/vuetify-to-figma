@@ -144,11 +144,39 @@ const handleLayersTabClick = (index: number) => {
   extractedLayer.value = undefined;
   return undefined;
 };
+
+// async function copyVisibleLayers() {
+//   try {
+//     const container = gridRoot.value;
+//     if (!container) return;
+//     const nodes = container.querySelectorAll(
+//       '[data-combination^="combination-"]'
+//     );
+//     const layers: LayerInfo[] = [];
+//     nodes.forEach((slotElement) => {
+//       const root = (slotElement as HTMLElement).children[0] as
+//         | HTMLElement
+//         | undefined;
+//       if (root) {
+//         layers.push(getDomAsJson(root, props.componentName));
+//       }
+//     });
+
+//     await navigator.clipboard.writeText(JSON.stringify(layers, null, 2));
+//   } catch (e) {
+//     console.error("No se pudieron copiar las capas visibles", e);
+//   }
+// }
 </script>
 
 <template>
   <div>
-    <h6 class="text-h6 mb-2">Playground</h6>
+    <div class="d-flex justify-space-between mb-2">
+      <h6 class="text-h6 mb-2">Playground</h6>
+      <VBtn color="primary" variant="tonal" prepend-icon="mdi-content-copy">
+        Copiar visibles
+      </VBtn>
+    </div>
     <VSheet dense :border="'sm'" rounded="lg" :color="bgColorPlayground">
       <VRow dense>
         <template v-for="(combination, i) in paginatedCombinations" :key="i">
