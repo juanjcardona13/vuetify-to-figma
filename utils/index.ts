@@ -347,17 +347,23 @@ export interface LayerInfo {
 
 export const globalDefinitionsProps: Record<
   string,
-  { howUse: string; values: unknown[] }
+  {
+    howUse: string;
+    values: unknown[];
+    type?: "boolean" | "freeValues" | "fixedValues";
+  }
 > = {
   active: {
     howUse:
       "In 'Appearance' click in 'Apply variable mode' select 'State' and then select 'active'",
     values: [true, false],
+    type: "boolean",
   },
   border: {
     howUse:
       "In 'Appearance' click in 'Apply variable mode' select 'Border Width' and then select the value you want to use",
     values: ["0", undefined, "xs", "sm", "md", "lg", "xl"],
+    type: "fixedValues",
   },
   color: {
     howUse:
@@ -371,11 +377,13 @@ export const globalDefinitionsProps: Record<
       "warning",
       "info",
     ],
+    type: "fixedValues",
   },
   disabled: {
     howUse:
       "In 'Appearance' click in 'Apply variable mode' select 'State' and then select 'disabled'",
     values: [true, false],
+    type: "boolean",
   },
   elevation: {
     howUse:
@@ -384,102 +392,120 @@ export const globalDefinitionsProps: Record<
       0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
       21, 22, 23, 24,
     ],
+    type: "fixedValues",
   },
   icon: {
     howUse:
       "First active property 'Show icon' and then select the icon you want to use",
     values: ["$vuetify", false],
+    type: "freeValues",
   },
   loading: {
     howUse: "In direct properties, search for 'loading'",
     values: [true, false],
+    type: "boolean",
   },
   text: {
     howUse:
       "In direct properties, search for 'text' and write the value you want to use",
     values: ["button"],
+    type: "freeValues",
   },
   label: {
     howUse:
       "In direct properties, search for 'label' and write the value you want to use",
     values: ["Label"],
+    type: "freeValues",
   },
   title: {
     howUse:
       "In direct properties, search for 'title' and write the value you want to use",
     values: ["Title"],
+    type: "freeValues",
   },
   type: {
     howUse:
       "In direct properties, search for 'type' and select the value you want to use",
     values: ["success", "error", "warning", "info"],
+    type: "fixedValues",
   },
   height: {
     howUse: "Figma native",
     values: [undefined],
+    type: "freeValues",
   },
   width: {
     howUse: "Figma native",
     values: [undefined],
+    type: "freeValues",
   },
   maxHeight: {
     howUse: "Figma native",
     values: [undefined],
+    type: "freeValues",
   },
   maxWidth: {
     howUse: "Figma native",
     values: [undefined],
+    type: "freeValues",
   },
   minHeight: {
     howUse: "Figma native",
     values: [undefined],
+    type: "freeValues",
   },
   minWidth: {
     howUse: "Figma native",
     values: [undefined],
-  },
-  position: {
-    howUse: "Figma native, partially supported.",
-    values: [undefined],
+    type: "freeValues",
   },
   appendIcon: {
     howUse: "",
     values: ["$vuetify"],
+    type: "freeValues",
   },
   rounded: {
     howUse:
       "In 'Appearance' click in 'Apply variable mode' select 'Border Radius' and then select the value you want to use",
     values: [undefined, "0", "sm", "lg", "xl", "pill"],
+    type: "fixedValues",
   },
   size: {
     howUse:
       "In 'Appearance' click in 'Apply variable mode' select 'Size' and then select the value you want to use",
     values: ["x-small", "small", "default", "large", "x-large"],
+    type: "fixedValues",
   },
   density: {
     howUse: "In direct properties, search for 'density'",
     values: ["compact", "comfortable", "default"],
+    type: "fixedValues",
   },
   stacked: {
     howUse: "In direct properties, search for 'stacked'",
     values: [true, false],
+    type: "boolean",
   },
   theme: {
     howUse:
       "In 'Appearance' click in 'Apply variable mode' select 'Theme' and then select the value you want to use",
     values: ["dark", "light"],
+    type: "fixedValues",
   },
   tile: {
     howUse: "Figma native",
     values: [true, false],
+    type: "boolean",
   },
   variant: {
     howUse:
       "In direct properties, search for 'variant' and select the value you want to use",
     values: ["elevated", "flat", "tonal", "outlined", "text", "plain"],
+    type: "fixedValues",
   },
   prependIcon: {
     howUse: "",
     values: ["$vuetify"],
+    type: "freeValues",
   },
 };
