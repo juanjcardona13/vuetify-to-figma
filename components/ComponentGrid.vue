@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const props = defineProps<{
+import ComponentItem from "./ComponentItem.vue";
+
+defineProps<{
   componentName: string;
 }>();
 
@@ -17,205 +19,68 @@ const numColumns = inject("numColumns", ref(2));
 const applyTheme = inject("applyTheme", ref(true));
 const applyBorder = inject("applyBorder", ref(false));
 
-const tab = ref("properties");
+const componentItems =
+  useTemplateRef<InstanceType<typeof ComponentItem>[]>("componentItems");
 
-const getFigmaLayerName = (element: HTMLElement) => {
-  const className = element.className;
-  const classNameArray = className.split(" ");
-  if (classNameArray.length === 1) {
-    return className.replace(`${props.componentName}__`, "");
-  }
-  return classNameArray[1];
+const copyExtractedLayers = () => {
+  const layers = componentItems.value?.map((item) => item.extractedLayer);
+  navigator.clipboard.writeText(JSON.stringify(layers, null, 2));
 };
 
-const getVuetifyComponentName = (element: HTMLElement) => {
-  const className = element.className;
-  if (typeof className === "string") {
-    const classNameArray = className.split(" ");
-    return (
-      classNameArray.find((className) =>
-        ALL_COMPONENTS_NAME.includes(className)
-      ) || ""
-    );
-  }
-  return "";
-};
-
-function getDomAsJson(element: HTMLElement, figmaLayerName: string): LayerInfo {
-  // Obtener estilos computados una sola vez por elemento
-  const computedStyle: CSSStyleDeclaration = window.getComputedStyle(element);
-
-  // Obtener solo el texto directo del elemento (excluyendo texto de hijos)
-  let directText: string = "";
-  for (const node of Array.from(element.childNodes)) {
-    if (node.nodeType === Node.TEXT_NODE) {
-      directText += (node.textContent ?? "").trim();
-    }
-  }
-
-  // Construir el objeto JSON
-  const result: LayerInfo = {
-    id: element.id || "",
-    isVuetifyComponent: false,
-    tagName: element.tagName.toLowerCase(),
-    figmaLayerName,
-    className: element.className || "",
-    textContent: {
-      text: directText,
-      fontFamily: computedStyle.fontFamily,
-      fontSize: computedStyle.fontSize,
-      fontWeight: computedStyle.fontWeight,
-      lineHeight: computedStyle.lineHeight,
-      letterSpacing: computedStyle.letterSpacing,
-      color: computedStyle.color,
-      textTransform: computedStyle.textTransform,
-      textAlign: computedStyle.textAlign,
-    },
-    styles: {
-      position: computedStyle.position,
-      x: computedStyle.left,
-      y: computedStyle.top,
-      display: computedStyle.display,
-      margin: computedStyle.margin,
-      marginLeft: computedStyle.marginLeft,
-      marginRight: computedStyle.marginRight,
-      marginTop: computedStyle.marginTop,
-      marginBottom: computedStyle.marginBottom,
-      padding: computedStyle.padding,
-      paddingLeft: computedStyle.paddingLeft,
-      paddingRight: computedStyle.paddingRight,
-      paddingTop: computedStyle.paddingTop,
-      paddingBottom: computedStyle.paddingBottom,
-      gap: computedStyle.gap,
-      flexDirection: computedStyle.flexDirection,
-      width: computedStyle.width,
-      minWidth: computedStyle.minWidth,
-      maxWidth: computedStyle.maxWidth,
-      height: computedStyle.height,
-      minHeight: computedStyle.minHeight,
-      maxHeight: computedStyle.maxHeight,
-      alignItems: computedStyle.alignItems,
-      justifyContent: computedStyle.justifyContent,
-      opacity: computedStyle.opacity,
-      border: computedStyle.border,
-      borderWidth: computedStyle.borderWidth,
-      borderColor: computedStyle.borderColor,
-      borderStyle: computedStyle.borderStyle,
-      borderRadius: computedStyle.borderRadius,
-      background: computedStyle.background,
-      backgroundColor: computedStyle.backgroundColor,
-      color: computedStyle.color,
-      boxShadow: computedStyle.boxShadow,
-      zIndex: computedStyle.zIndex,
-    },
-    children: [],
-  };
-
-  // Recorrer hijos solo si son elementos
-  for (const child of Array.from(element.children) as HTMLElement[]) {
-    if (getVuetifyComponentName(child)) {
-      result.children.push({
-        figmaLayerName: kebabToPascal(getVuetifyComponentName(child)),
-        isVuetifyComponent: true,
-        tagName: child.tagName.toLowerCase(),
-        children: [],
-      });
+const applyVAppWrapper = () => {
+  componentItems.value?.forEach((item) => {
+    if (item.componentWrapper === "VSheet") {
+      item.componentWrapper = "VApp";
     } else {
-      result.children.push(getDomAsJson(child, getFigmaLayerName(child)));
+      item.componentWrapper = "VSheet";
     }
-  }
-
-  return result;
-}
-
-const extractedLayer = ref<LayerInfo>();
-
-const handleLayersTabClick = (index: number) => {
-  const slotElement = document.querySelector(
-    `[data-combination="combination-${index}"]`
-  );
-  if (slotElement) {
-    extractedLayer.value = getDomAsJson(
-      slotElement.children[0] as HTMLElement,
-      props.componentName
-    );
-    return extractedLayer.value;
-  }
-  extractedLayer.value = undefined;
-  return undefined;
+  });
 };
-
-// async function copyVisibleLayers() {
-//   try {
-//     const container = gridRoot.value;
-//     if (!container) return;
-//     const nodes = container.querySelectorAll(
-//       '[data-combination^="combination-"]'
-//     );
-//     const layers: LayerInfo[] = [];
-//     nodes.forEach((slotElement) => {
-//       const root = (slotElement as HTMLElement).children[0] as
-//         | HTMLElement
-//         | undefined;
-//       if (root) {
-//         layers.push(getDomAsJson(root, props.componentName));
-//       }
-//     });
-
-//     await navigator.clipboard.writeText(JSON.stringify(layers, null, 2));
-//   } catch (e) {
-//     console.error("No se pudieron copiar las capas visibles", e);
-//   }
-// }
 </script>
 
 <template>
   <div>
     <div class="d-flex justify-space-between mb-2">
       <h6 class="text-h6 mb-2">Playground</h6>
-      <VBtn color="primary" variant="tonal" prepend-icon="mdi-content-copy">
-        Copiar visibles
-      </VBtn>
+      <div>
+        <VBtn
+          color="primary"
+          variant="tonal"
+          prepend-icon="mdi-content-copy"
+          text="Change Wrapper"
+          class="mr-2"
+          @click="applyVAppWrapper"
+        />
+
+        <VBtn
+          color="primary"
+          variant="tonal"
+          prepend-icon="mdi-content-copy"
+          text="Copiar Layers"
+          @click="copyExtractedLayers"
+        />
+      </div>
     </div>
     <VSheet dense :border="'sm'" rounded="lg" :color="bgColorPlayground">
       <VRow dense>
-        <template v-for="(combination, i) in paginatedCombinations" :key="i">
+        <template
+          v-for="(realCombination, i) in paginatedCombinations"
+          :key="i"
+        >
           <VCol :cols="numColumns">
-            <VMenu open-on-hover :close-on-content-click="false">
-              <template #activator="{ props: menuBtnProps }">
-                <VSheet
-                  v-bind="menuBtnProps"
-                  class="d-flex justify-center align-center pa-2 rounded-lg"
-                  :theme="
-                    applyTheme ? (combination.props.theme as string) : undefined
-                  "
-                  :border="applyBorder ? 'sm' : undefined"
-                  :color="applyTheme ? undefined : bgColorPlayground"
-                  :data-combination="`combination-${i}`"
-                >
-                  <slot name="component" :combination="combination" />
-                </VSheet>
+            <ComponentItem
+              :id="`combination-${i}`"
+              ref="componentItems"
+              :apply-theme="applyTheme"
+              :apply-border="applyBorder"
+              :bg-color-playground="bgColorPlayground"
+              :combination="realCombination"
+              :component-name="componentName"
+            >
+              <template #component="{ combination }">
+                <slot name="component" :combination="combination" />
               </template>
-              <VCard>
-                <VTabs v-model="tab">
-                  <VTab value="properties">Properties</VTab>
-                  <VTab value="layers" @click="handleLayersTabClick(i)">
-                    Layers
-                  </VTab>
-                </VTabs>
-                <VTabsWindow v-model="tab">
-                  <VTabsWindowItem value="properties">
-                    <PropertiesInspector :combination="combination" />
-                  </VTabsWindowItem>
-                  <VTabsWindowItem value="layers">
-                    <LayersInspector
-                      v-if="extractedLayer"
-                      :extracted-layer="extractedLayer"
-                    />
-                  </VTabsWindowItem>
-                </VTabsWindow>
-              </VCard>
-            </VMenu>
+            </ComponentItem>
           </VCol>
         </template>
       </VRow>
