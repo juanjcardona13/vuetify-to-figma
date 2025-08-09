@@ -296,17 +296,30 @@ export interface LayerInfo {
   className?: string;
   textContent?: {
     text: string;
+    fontFamily: string;
     fontSize: string;
     fontWeight: string;
     lineHeight: string;
     letterSpacing: string;
+    textTransform: string;
+    textAlign: string;
     color: string;
   };
   styles?: {
     position: string;
+    x: string;
+    y: string;
     display: string;
     margin: string;
+    marginLeft: string;
+    marginRight: string;
+    marginTop: string;
+    marginBottom: string;
     padding: string;
+    paddingLeft: string;
+    paddingRight: string;
+    paddingTop: string;
+    paddingBottom: string;
     gap: string;
     flexDirection: string;
     width: string;
@@ -319,8 +332,12 @@ export interface LayerInfo {
     justifyContent: string;
     opacity: string;
     border: string;
+    borderWidth: string;
+    borderColor: string;
+    borderStyle: string;
     borderRadius: string;
     background: string;
+    backgroundColor: string;
     color: string;
     boxShadow: string;
     zIndex: string;
