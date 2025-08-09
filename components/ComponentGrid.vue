@@ -28,11 +28,12 @@ const copyExtractedLayers = () => {
 };
 
 const applyVAppWrapper = () => {
+  const isApp = componentItems.value?.[0]?.componentWrapper === "VApp";
   componentItems.value?.forEach((item) => {
-    if (item.componentWrapper === "VSheet") {
-      item.componentWrapper = "VApp";
-    } else {
+    if (isApp) {
       item.componentWrapper = "VSheet";
+    } else {
+      item.componentWrapper = "VApp";
     }
   });
 };

@@ -26,23 +26,6 @@ const propsSchema = computed<Record<
     ? normalizeProps(compDef.value.props)
     : null
 );
-
-const ignoreProps = [
-  "_as",
-  "tag",
-  "style",
-  "class",
-  "exact",
-  "href",
-  "location",
-  "readonly",
-  "replace",
-  "ripple",
-  "selectedClass",
-  "symbol",
-  "to",
-  "value",
-];
 </script>
 
 <template>
@@ -53,8 +36,8 @@ const ignoreProps = [
       v-if="propsSchema"
       :component-name="ComponentName"
       :component-props="propsSchema"
-      :definitions-props="globalDefinitionsProps"
-      :ignore-props="ignoreProps"
+      :definitions-props="globalSupportedProps"
+      :ignore-props="globalIgnoreProps"
       :initial-props-to-show="['text']"
     >
       <template #component="{ combination }">

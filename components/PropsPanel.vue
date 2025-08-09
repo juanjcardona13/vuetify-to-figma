@@ -1,19 +1,30 @@
 <script setup lang="ts">
-
-defineProps<{
+const props = defineProps<{
   componentPropsList: Array<{
     name: string;
     supported: boolean;
     key: string;
   }>;
-  definitionsProps: Record<string, { howUse: string; values: unknown[] }>;
+  definitionsProps: Record<
+    string,
+    {
+      howUse: string;
+      values: unknown[];
+      type: "boolean" | "freeValues" | "fixedValues";
+    }
+  >;
 }>();
 
-
-const search = inject('search', ref(''))
-const applyTheme = inject('applyTheme', ref(true))
-const propsShowInPlayground = inject('propsShowInPlayground', ref<string[]>([]))
-const selectedValuesByProp = inject('selectedValuesByProp', ref<Record<string, unknown[]>>({}))
+const search = inject("search", ref(""));
+const applyTheme = inject("applyTheme", ref(true));
+const propsShowInPlayground = inject(
+  "propsShowInPlayground",
+  ref<string[]>([])
+);
+const selectedValuesByProp = inject(
+  "selectedValuesByProp",
+  ref<Record<string, unknown[]>>({})
+);
 
 // Función para obtener los valores seleccionados de un prop
 const getSelectedValues = (propKey: string): unknown[] => {
@@ -25,6 +36,19 @@ const updateSelectedValues = (propKey: string, values: unknown[]): void => {
   selectedValuesByProp.value[propKey] = values;
 };
 
+// Helpers para edición de valores libres (freeValues)
+const getFreeValueText = (propKey: string): string => {
+  const selected = getSelectedValues(propKey);
+  const current =
+    selected && selected[0] !== undefined
+      ? selected[0]
+      : (props.definitionsProps?.[propKey]?.values?.[0] ?? "");
+  return current === undefined ? "" : String(current);
+};
+
+const setFreeValueText = (propKey: string, value: string): void => {
+  updateSelectedValues(propKey, [value]);
+};
 </script>
 
 <template>
@@ -140,6 +164,22 @@ const updateSelectedValues = (propKey: string, values: unknown[]): void => {
                         {{ value === undefined ? "undefined" : String(value) }}
                       </VChip>
                     </VChipGroup>
+                  </div>
+
+                  <div
+                    v-if="definitionsProps[item.raw.key]?.type === 'freeValues'"
+                    class="mt-3"
+                  >
+                    <VTextField
+                      :model-value="getFreeValueText(item.raw.key)"
+                      label="Custom value"
+                      density="compact"
+                      hide-details
+                      clearable
+                      @update:model-value="
+                        (val) => setFreeValueText(item.raw.key, val ?? '')
+                      "
+                    />
                   </div>
                 </div>
               </div>
