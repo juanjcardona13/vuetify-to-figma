@@ -30,6 +30,8 @@ const completeComponents = [
   "VToolbarItems",
   "VToolbarTitle",
   "VTimelineItem",
+  "VAppBarNavIcon",
+  "VAppBarTitle",
 ];
 </script>
 
