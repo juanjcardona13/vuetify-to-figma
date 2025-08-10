@@ -5,14 +5,7 @@ import type { ComponentProps } from "../utils/index";
 
 export function useComponentPlayground(
   componentProps: Record<string, { default?: string | undefined }>,
-  definitionsProps: Record<
-    string,
-    {
-      howUse: string;
-      values: unknown[];
-      type: "boolean" | "freeValues" | "fixedValues";
-    }
-  >,
+  definitionsProps: GlobalSupportedProps,
   ignoreProps: string[] = [],
   initialPropsToShow: string[] = [],
   selectedValuesByProp: ComputedRef<Record<string, unknown[]>> = computed(

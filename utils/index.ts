@@ -351,7 +351,22 @@ export interface LayerInfo {
 // Soportados => Todo que modifica el diseño
 // No soportados =>
 
+export type GlobalSupportedProps = Record<
+  string,
+  {
+    howUse: string;
+    values: unknown[];
+    type: "boolean" | "freeValues" | "fixedValues";
+  }
+>;
+
 export const globalIgnoreProps = [
+  "continuous",
+  "direction",
+  "mandatory",
+  "reverse",
+  "touch",
+  "activator",
   "_as",
   "tag",
   "style",
@@ -383,14 +398,7 @@ export const globalIgnoreProps = [
   "autoSelectFirst",
 ];
 
-export const globalSupportedProps: Record<
-  string,
-  {
-    howUse: string;
-    values: unknown[];
-    type?: "boolean" | "freeValues" | "fixedValues";
-  }
-> = {
+export const globalSupportedProps: GlobalSupportedProps = {
   active: {
     howUse:
       "In 'Appearance' click in 'Apply variable mode' select 'State' and then select 'active'",
@@ -1418,13 +1426,13 @@ export const globalSupportedProps: Record<
   },
   nextIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$next"],
+    type: "freeValues",
   },
   prevIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$prev"],
+    type: "freeValues",
   },
   showAdjacentMonths: {
     howUse: "",
@@ -1533,8 +1541,8 @@ export const globalSupportedProps: Record<
   },
   showArrows: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   touch: {
     howUse: "",
@@ -1543,7 +1551,7 @@ export const globalSupportedProps: Record<
   },
   verticalArrows: {
     howUse: "",
-    values: [undefined],
+    values: [true, false, "left", "right"],
     type: "fixedValues",
   },
   verticalDelimiters: {
