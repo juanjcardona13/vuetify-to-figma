@@ -437,6 +437,19 @@ export const globalIgnoreProps = [
   "itemProps",
   "itemType",
   "itemValue",
+  "listProps",
+  "menuProps",
+  "noAutoScroll",
+  "noFilter",
+  "openOnClear",
+  "returnObject",
+  "reverse",
+  "role",
+  "rules",
+  "transition",
+  "valueComparator",
+  "activatorProps",
+  "activeClass",
 ];
 
 export const globalSupportedProps: GlobalSupportedProps = {
@@ -987,7 +1000,7 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   items: {
     howUse: "",
-    values: [undefined, "item 1", "item 2"],
+    values: [undefined, "Item 1", "Item 2"],
     type: "freeValues",
   },
   listProps: {
@@ -1002,8 +1015,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   menu: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   menuIcon: {
     howUse: "",
@@ -1027,8 +1040,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   multiple: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   noAutoScroll: {
     howUse: "",
@@ -1037,8 +1050,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   noDataText: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["No data text"],
+    type: "freeValues",
   },
   noFilter: {
     howUse: "",
@@ -1047,13 +1060,13 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   openOnClear: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   openText: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["Open Text"],
+    type: "freeValues",
   },
   persistentClear: {
     howUse: "",
@@ -1112,8 +1125,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   search: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["Search"],
+    type: "freeValues",
   },
   singleLine: {
     howUse: "",
@@ -1132,7 +1145,30 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   validateOn: {
     howUse: "",
-    values: [undefined],
+    values: [
+      "eager",
+      "lazy",
+      "blur",
+      "input",
+      "submit",
+      "invalid-input",
+      "blur lazy",
+      "input lazy",
+      "submit lazy",
+      "invalid-input lazy",
+      "blur eager",
+      "input eager",
+      "submit eager",
+      "invalid-input eager",
+      "lazy blur",
+      "lazy input",
+      "lazy submit",
+      "lazy invalid-input",
+      "eager blur",
+      "eager input",
+      "eager submit",
+      "eager invalid-input",
+    ],
     type: "fixedValues",
   },
   valueComparator: {
@@ -1142,48 +1178,48 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   end: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   start: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   bordered: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   content: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["text", 0],
+    type: "freeValues",
   },
   dot: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   inline: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   max: {
-    howUse: "",
+    howUse: "Figma native",
     values: [undefined],
-    type: "fixedValues",
+    type: "freeValues",
   },
   offsetX: {
-    howUse: "",
+    howUse: "Figma native",
     values: [undefined],
-    type: "fixedValues",
+    type: "freeValues",
   },
   offsetY: {
-    howUse: "",
+    howUse: "Figma native",
     values: [undefined],
-    type: "fixedValues",
+    type: "freeValues",
   },
   textColor: {
     howUse: "",
@@ -1192,33 +1228,33 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   avatar: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["https://cdn.vuetifyjs.com/images/parallax/material.jpg"],
+    type: "freeValues",
   },
   lines: {
     howUse: "",
-    values: [undefined],
+    values: ["one", "two", "three"],
     type: "fixedValues",
   },
   mobile: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   mobileBreakpoint: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [undefined, "0", "xs", "sm", "md", "lg", "xl", "xxl"],
+    type: "freeValues",
   },
   sticky: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   grow: {
-    howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    howUse: "Figma native",
+    values: [true, false],
+    type: "boolean",
   },
   mandatory: {
     howUse: "",
@@ -1372,8 +1408,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   divider: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+    type: "freeValues",
   },
   divided: {
     howUse: "",

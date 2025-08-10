@@ -17,6 +17,7 @@ const ignoreComponents = [
   "VTimePickerControls",
   "VTimePickerClock",
   "VTimePicker",
+  "VBottomSheet",
 ];
 
 const completeComponents = [
@@ -32,6 +33,13 @@ const completeComponents = [
   "VTimelineItem",
   "VAppBarNavIcon",
   "VAppBarTitle",
+  "VAutocomplete",
+  "VAvatar",
+  "VBadge",
+  "VBanner",
+  "VBannerText",
+  "VBannerActions",
+  "VBottomNavigation",
 ];
 </script>
 
