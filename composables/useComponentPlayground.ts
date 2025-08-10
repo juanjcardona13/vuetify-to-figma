@@ -1,14 +1,23 @@
-import { computed, ref, watch } from 'vue';
-import type { ComputedRef } from 'vue';
-import { toCapitalize, generateCombinations } from '../utils/index';
-import type { ComponentProps } from '../utils/index';
+import { computed, ref, watch } from "vue";
+import type { ComputedRef } from "vue";
+import { toCapitalize, generateCombinations } from "../utils/index";
+import type { ComponentProps } from "../utils/index";
 
 export function useComponentPlayground(
   componentProps: Record<string, { default?: string | undefined }>,
-  definitionsProps: Record<string, { howUse: string; values: unknown[] }>,
+  definitionsProps: Record<
+    string,
+    {
+      howUse: string;
+      values: unknown[];
+      type: "boolean" | "freeValues" | "fixedValues";
+    }
+  >,
   ignoreProps: string[] = [],
   initialPropsToShow: string[] = [],
-  selectedValuesByProp: ComputedRef<Record<string, unknown[]>> = computed(() => ({}))
+  selectedValuesByProp: ComputedRef<Record<string, unknown[]>> = computed(
+    () => ({})
+  )
 ) {
   const search = ref("");
   const propsShowInPlayground = ref<string[]>(initialPropsToShow);
@@ -39,16 +48,21 @@ export function useComponentPlayground(
 
   const allCombinations = computed(() => {
     const selectedDefinitionsProps: Record<string, { values: unknown[] }> = {};
-    propsShowInPlayground.value.forEach(prop => {
+    propsShowInPlayground.value.forEach((prop) => {
       const selectedValues = selectedValuesByProp.value[prop];
       if (selectedValues && selectedValues.length > 0) {
         selectedDefinitionsProps[prop] = { values: selectedValues };
       } else if (definitionsProps[prop]) {
-        selectedDefinitionsProps[prop] = { values: definitionsProps[prop].values };
+        selectedDefinitionsProps[prop] = {
+          values: definitionsProps[prop].values,
+        };
       }
     });
 
-    return generateCombinations(propsShowInPlayground.value, selectedDefinitionsProps);
+    return generateCombinations(
+      propsShowInPlayground.value,
+      selectedDefinitionsProps
+    );
   });
 
   const totalItems = computed(() => allCombinations.value.length);

@@ -348,8 +348,8 @@ export interface LayerInfo {
 /** La lista de abajo modifica logica y comportamiento de los componentes */
 // Ignorados
 /** La lista de abajo modifica como se ve el componente */
-// Soportados
-// No soportados
+// Soportados => Todo que modifica el diseño
+// No soportados =>
 
 export const globalIgnoreProps = [
   "_as",
@@ -366,6 +366,21 @@ export const globalIgnoreProps = [
   "symbol",
   "to",
   "value",
+  "closeLabel",
+  "iconSizes",
+  "modelValue",
+  "position",
+  "absolute",
+  "floating",
+  "name",
+  "order",
+  "scrollBehavior",
+  "scrollTarget",
+  "scrollThreshold",
+  "activeColor",
+  "baseColor",
+  "autofocus",
+  "autoSelectFirst",
 ];
 
 export const globalSupportedProps: Record<
@@ -385,7 +400,19 @@ export const globalSupportedProps: Record<
   border: {
     howUse:
       "In 'Appearance' click in 'Apply variable mode' select 'Border Width' and then select the value you want to use",
-    values: ["0", undefined, "xs", "sm", "md", "lg", "xl"],
+    values: [
+      "0",
+      undefined,
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl",
+      "top",
+      "end",
+      "bottom",
+      "start",
+    ], // TODO: Para el VAlert, solo funcionan los ultimos 4 valores, mirar como se los mostramos al usuario
     type: "fixedValues",
   },
   color: {
@@ -533,18 +560,26 @@ export const globalSupportedProps: Record<
   },
   borderColor: {
     howUse: "",
-    values: [undefined],
+    values: [
+      "default",
+      "primary",
+      "secondary",
+      "success",
+      "error",
+      "warning",
+      "info",
+    ],
     type: "fixedValues",
   },
   closable: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   closeIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$close"],
+    type: "freeValues",
   },
   closeLabel: {
     howUse: "",
@@ -578,8 +613,8 @@ export const globalSupportedProps: Record<
   },
   prominent: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   tag: {
     howUse: "",
@@ -587,7 +622,7 @@ export const globalSupportedProps: Record<
     type: "fixedValues",
   },
   fullHeight: {
-    howUse: "",
+    howUse: "Figma native",
     values: [undefined],
     type: "fixedValues",
   },
@@ -598,38 +633,38 @@ export const globalSupportedProps: Record<
   },
   absolute: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   collapse: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   extended: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   extensionHeight: {
-    howUse: "",
+    howUse: "Figma native",
     values: [undefined],
-    type: "fixedValues",
+    type: "freeValues",
   },
   flat: {
-    howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    howUse: "Figma native",
+    values: [true, false],
+    type: "boolean",
   },
   floating: {
-    howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    howUse: "Figma native",
+    values: [true, false],
+    type: "boolean",
   },
   image: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["https://cdn.vuetifyjs.com/images/parallax/material.jpg"],
+    type: "freeValues",
   },
   name: {
     howUse: "",
@@ -667,9 +702,9 @@ export const globalSupportedProps: Record<
     type: "fixedValues",
   },
   block: {
-    howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    howUse: "Figma native",
+    values: [true, false],
+    type: "boolean",
   },
   exact: {
     howUse: "",
@@ -702,9 +737,9 @@ export const globalSupportedProps: Record<
     type: "fixedValues",
   },
   slim: {
-    howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    howUse: "Figma native",
+    values: [true, false],
+    type: "boolean",
   },
   symbol: {
     howUse: "",
@@ -727,9 +762,9 @@ export const globalSupportedProps: Record<
     type: "fixedValues",
   },
   autofocus: {
-    howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    howUse: "Figma native",
+    values: [true, false],
+    type: "boolean",
   },
   bgColor: {
     howUse: "",

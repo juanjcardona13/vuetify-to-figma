@@ -2,10 +2,18 @@
 const props = defineProps<{
   componentName: string;
   componentProps: Record<string, { default?: string | undefined }>;
-  definitionsProps: Record<string, { howUse: string; values: unknown[] }>;
+  definitionsProps: Record<
+    string,
+    {
+      howUse: string;
+      values: unknown[];
+      type: "boolean" | "freeValues" | "fixedValues";
+    }
+  >;
   ignoreProps?: string[];
   initialPropsToShow?: string[];
   initialNumColumns?: number;
+  wrapperVApp?: boolean;
 }>();
 
 const bgColorPlayground = ref("#ffffff");
@@ -45,6 +53,9 @@ provide("paginatedCombinations", paginatedCombinations);
 provide("numColumns", numColumns);
 provide("applyTheme", applyTheme);
 provide("applyBorder", applyBorder);
+
+console.log(props.wrapperVApp, "============");
+provide("wrapperVApp", props.wrapperVApp);
 </script>
 
 <template>

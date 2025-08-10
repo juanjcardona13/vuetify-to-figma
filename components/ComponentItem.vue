@@ -157,8 +157,9 @@ onMounted(() => {
 
 onUnmounted(() => stop());
 
+const wrapperVApp = inject("wrapperVApp", false);
 const tab = ref("properties");
-const componentWrapper = ref("VSheet");
+const componentWrapper = ref(wrapperVApp ? "VApp" : "VSheet");
 
 defineExpose({
   extractedLayer,

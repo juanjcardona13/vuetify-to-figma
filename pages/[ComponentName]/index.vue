@@ -26,11 +26,27 @@ const propsSchema = computed<Record<
     ? normalizeProps(compDef.value.props)
     : null
 );
+
+const wrapperVApp = computed(() => {
+  return [
+    "v-app",
+    "v-app-bar",
+    "v-container",
+    "v-footer",
+    "v-main",
+    "VAppBar",
+    "VContainer",
+    "VFooter",
+    "VMain",
+  ].includes(ComponentName);
+});
 </script>
 
 <template>
   <div>
-    <h1>{{ ComponentName }}</h1>
+    <NuxtLink to="/">
+      <h1>{{ ComponentName }}</h1>
+    </NuxtLink>
 
     <ComponentPlayground
       v-if="propsSchema"
@@ -39,6 +55,7 @@ const propsSchema = computed<Record<
       :definitions-props="globalSupportedProps"
       :ignore-props="globalIgnoreProps"
       :initial-props-to-show="['text']"
+      :wrapper-v-app="wrapperVApp"
     >
       <template #component="{ combination }">
         <component :is="ComponentName" v-bind="{ ...combination.props }" />
