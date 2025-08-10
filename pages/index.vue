@@ -7,9 +7,30 @@ import * as vuetify_components from "vuetify/components";
 const vuetifyComponents = Object.keys(vuetify_components);
 const vuetifyLabsComponents = Object.keys(vuetify_labs_components);
 
-const ignoreComponents = ["VVirtualScroll", "VValidation"];
+const ignoreComponents = [
+  "VVirtualScroll",
+  "VValidation",
+  "VThemeProvider",
+  "VWindowItem",
+  "VTreeviewItem",
+  "VTreeview",
+  "VTimePickerControls",
+  "VTimePickerClock",
+  "VTimePicker",
+];
 
-const completeComponents = ["VAlert", "VAlertTitle", "VApp", "VAppBar", "VBtn"];
+const completeComponents = [
+  "VAlert",
+  "VAlertTitle",
+  "VApp",
+  "VAppBar",
+  "VBtn",
+  "VToolbar",
+  "VTimeline",
+  "VToolbarItems",
+  "VToolbarTitle",
+  "VTimelineItem",
+];
 </script>
 
 <template>

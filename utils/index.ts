@@ -362,11 +362,11 @@ export type GlobalSupportedProps = Record<
 
 export const globalIgnoreProps = [
   "continuous",
-  "direction",
   "mandatory",
   "reverse",
   "touch",
   "activator",
+  "justify",
   "_as",
   "tag",
   "style",
@@ -702,12 +702,12 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   activeColor: {
     howUse: "",
-    values: [undefined],
+    values: ["primary", "secondary", "success", "info", "warning", "error"],
     type: "fixedValues",
   },
   baseColor: {
     howUse: "",
-    values: [undefined],
+    values: ["primary", "secondary", "success", "info", "warning", "error"],
     type: "fixedValues",
   },
   block: {
@@ -777,7 +777,7 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   bgColor: {
     howUse: "",
-    values: [undefined],
+    values: ["primary", "secondary", "success", "info", "warning", "error"],
     type: "fixedValues",
   },
   centerAffix: {
@@ -842,7 +842,7 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   direction: {
     howUse: "",
-    values: [undefined],
+    values: ["horizontal", "vertical"],
     type: "fixedValues",
   },
   eager: {
@@ -907,7 +907,7 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   iconColor: {
     howUse: "",
-    values: [undefined],
+    values: ["primary", "secondary", "success", "info", "warning", "error"],
     type: "fixedValues",
   },
   id: {
@@ -922,7 +922,7 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   itemColor: {
     howUse: "",
-    values: [undefined],
+    values: ["primary", "secondary", "success", "info", "warning", "error"],
     type: "fixedValues",
   },
   itemProps: {
@@ -967,8 +967,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   menuIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$dropdown"],
+    type: "freeValues",
   },
   menuProps: {
     howUse: "",
@@ -1047,8 +1047,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   prependInnerIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$vuetify"],
+    type: "freeValues",
   },
   returnObject: {
     howUse: "",
@@ -1147,7 +1147,7 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   textColor: {
     howUse: "",
-    values: [undefined],
+    values: ["primary", "secondary", "success", "info", "warning", "error"],
     type: "fixedValues",
   },
   avatar: {
@@ -1522,8 +1522,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   delimiterIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$delimiter"],
+    type: "freeValues",
   },
   hideDelimiterBackground: {
     howUse: "",
@@ -1632,8 +1632,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   falseIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$checkboxOff"],
+    type: "freeValues",
   },
   falseValue: {
     howUse: "",
@@ -1647,13 +1647,13 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   indeterminateIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$checkboxIndeterminate"],
+    type: "freeValues",
   },
   trueIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$checkboxOn"],
+    type: "freeValues",
   },
   trueValue: {
     howUse: "",
@@ -1672,8 +1672,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   filterIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$complete"],
+    type: "freeValues",
   },
   pill: {
     howUse: "",
@@ -1777,8 +1777,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   appendInnerIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$vuetify"],
+    type: "freeValues",
   },
   cancelText: {
     howUse: "",
@@ -1842,8 +1842,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   pipIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$color"],
+    type: "freeValues",
   },
   showSwatches: {
     howUse: "",
@@ -1947,8 +1947,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   firstIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$first"],
+    type: "freeValues",
   },
   firstPageLabel: {
     howUse: "",
@@ -2002,8 +2002,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   lastIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$last"],
+    type: "freeValues",
   },
   lastPageLabel: {
     howUse: "",
@@ -2042,13 +2042,13 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   sortAscIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$sortAsc"],
+    type: "freeValues",
   },
   sortDescIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$sortDesc"],
+    type: "freeValues",
   },
   striped: {
     howUse: "",
@@ -2102,7 +2102,7 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   headerColor: {
     howUse: "",
-    values: [undefined],
+    values: ["primary", "secondary", "success", "info", "warning", "error"],
     type: "fixedValues",
   },
   hideWeekdays: {
@@ -2117,8 +2117,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   modeIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$subgroup"],
+    type: "freeValues",
   },
   showWeek: {
     howUse: "",
@@ -2202,13 +2202,13 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   collapseIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$collapse"],
+    type: "freeValues",
   },
   expandIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$expand"],
+    type: "freeValues",
   },
   focusable: {
     howUse: "",
@@ -2277,8 +2277,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   fileIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["mdi-file-document"],
+    type: "freeValues",
   },
   nav: {
     howUse: "",
@@ -2312,8 +2312,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   activeIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$vuetify"],
+    type: "freeValues",
   },
   activeVariant: {
     howUse: "",
@@ -2352,7 +2352,7 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   side: {
     howUse: "",
-    values: [undefined],
+    values: ["start", "end"],
     type: "fixedValues",
   },
   activatable: {
@@ -2637,7 +2637,7 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   bufferColor: {
     howUse: "",
-    values: [undefined],
+    values: ["primary", "secondary", "success", "info", "warning", "error"],
     type: "fixedValues",
   },
   bufferOpacity: {
@@ -2687,7 +2687,7 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   thumbColor: {
     howUse: "",
-    values: [undefined],
+    values: ["primary", "secondary", "success", "info", "warning", "error"],
     type: "fixedValues",
   },
   thumbLabel: {
@@ -2712,12 +2712,12 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   trackColor: {
     howUse: "",
-    values: [undefined],
+    values: ["primary", "secondary", "success", "info", "warning", "error"],
     type: "fixedValues",
   },
   trackFillColor: {
     howUse: "",
-    values: [undefined],
+    values: ["primary", "secondary", "success", "info", "warning", "error"],
     type: "fixedValues",
   },
   trackSize: {
@@ -2727,13 +2727,13 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   emptyIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$ratingEmpty"],
+    type: "freeValues",
   },
   fullIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$ratingFull"],
+    type: "freeValues",
   },
   halfIncrements: {
     howUse: "",
@@ -2757,7 +2757,7 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   align: {
     howUse: "",
-    values: [undefined],
+    values: ["start", "center"],
     type: "fixedValues",
   },
   alignContent: {
@@ -2937,13 +2937,13 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   completeIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$complete"],
+    type: "freeValues",
   },
   editIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$edit"],
+    type: "freeValues",
   },
   editable: {
     howUse: "",
@@ -2952,8 +2952,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   errorIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$error"],
+    type: "freeValues",
   },
   nextText: {
     howUse: "",
@@ -2992,7 +2992,7 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   sliderColor: {
     howUse: "",
-    values: [undefined],
+    values: ["primary", "secondary", "success", "info", "warning", "error"],
     type: "fixedValues",
   },
   alignTabs: {
@@ -3097,22 +3097,22 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   dotColor: {
     howUse: "",
-    values: [undefined],
+    values: ["primary", "secondary", "success", "info", "warning", "error"],
     type: "fixedValues",
   },
   fillDot: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   hideOpposite: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   lineColor: {
     howUse: "",
-    values: [undefined],
+    values: ["primary", "secondary", "success", "info", "warning", "error"],
     type: "fixedValues",
   },
   lineInset: {
@@ -3127,13 +3127,13 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   truncateLine: {
     howUse: "",
-    values: [undefined],
+    values: ["end", "start", "both"],
     type: "fixedValues",
   },
   hideDot: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   interactive: {
     howUse: "",
@@ -3152,8 +3152,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   loadingIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$loading"],
+    type: "freeValues",
   },
   openAll: {
     howUse: "",
@@ -3162,7 +3162,7 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   selectedColor: {
     howUse: "",
-    values: [undefined],
+    values: ["primary", "secondary", "success", "info", "warning", "error"],
     type: "fixedValues",
   },
   separateRoots: {
@@ -3172,8 +3172,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   toggleIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$vuetify"],
+    type: "freeValues",
   },
   autoplay: {
     howUse: "",
@@ -3182,7 +3182,7 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   backgroundColor: {
     howUse: "",
-    values: [undefined],
+    values: ["primary", "secondary", "success", "info", "warning", "error"],
     type: "fixedValues",
   },
   controlsProps: {
