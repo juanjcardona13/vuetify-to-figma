@@ -367,6 +367,37 @@ export const globalIgnoreProps = [
   "touch",
   "activator",
   "justify",
+  "autoGrow",
+  "counterValue",
+  "persistentClear",
+  "persistentCounter",
+  "persistentHint",
+  "persistentPlaceholder",
+  "validationValue",
+  "closeDelay",
+  "closeOnBack",
+  "closeOnContentClick",
+  "locationStrategy",
+  "noClickAnimation",
+  "openOnClick",
+  "openOnFocus",
+  "openOnHover",
+  "expandOnClick",
+  "OnClick:appendInner",
+  "OnClick:clear",
+  "onClick:append",
+  "onClick:appendInner",
+  "onClick:clear",
+  "onClick:prepend",
+  "onClick:prependInner",
+  "onUpdate:focused",
+  "validateOn",
+  "noResize",
+  "modelModifiers",
+  "maxRows",
+  "rules",
+  "rows",
+  "id",
   "_as",
   "tag",
   "style",
@@ -837,8 +868,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   details: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   direction: {
     howUse: "",
@@ -852,13 +883,13 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   error: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   errorMessages: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [undefined, "Error message 1", "Error message 2"],
+    type: "freeValues",
   },
   filterKeys: {
     howUse: "",
@@ -872,38 +903,38 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   focused: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   glow: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   hideDetails: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   hideNoData: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   hideSelected: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   hideSpinButtons: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   hint: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [undefined, "Hint text"],
+    type: "freeValues",
   },
   iconColor: {
     howUse: "",
@@ -957,8 +988,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   maxErrors: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [undefined, 1, 2, 3],
+    type: "freeValues",
   },
   menu: {
     howUse: "",
@@ -977,8 +1008,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   messages: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [undefined, "Message 1", "Message 2"],
+    type: "freeValues",
   },
   modelModifiers: {
     howUse: "",
@@ -1017,33 +1048,33 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   persistentClear: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   persistentCounter: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   persistentHint: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   persistentPlaceholder: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   placeholder: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [undefined, "Placeholder text"],
+    type: "freeValues",
   },
   prefix: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [undefined, "$"],
+    type: "freeValues",
   },
   prependInnerIcon: {
     howUse: "",
@@ -1077,13 +1108,13 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   singleLine: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   suffix: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [undefined, ".00"],
+    type: "freeValues",
   },
   transition: {
     howUse: "",
@@ -1437,8 +1468,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   showAdjacentMonths: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   viewMode: {
     howUse: "",
@@ -1792,8 +1823,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   dirty: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   dotSize: {
     howUse: "",
@@ -1847,8 +1878,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   showSwatches: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   swatches: {
     howUse: "",
@@ -1922,13 +1953,13 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   showExpand: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   showSelect: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   sortBy: {
     howUse: "",
@@ -2037,8 +2068,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   showCurrentPage: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   sortAscIcon: {
     howUse: "",
@@ -2122,8 +2153,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   showWeek: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   updateOn: {
     howUse: "",
@@ -2252,8 +2283,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   showSize: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   browseText: {
     howUse: "",
@@ -2552,8 +2583,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   showFirstLastPage: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   totalVisible: {
     howUse: "",
@@ -2677,8 +2708,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   showTicks: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   strict: {
     howUse: "",
@@ -2922,8 +2953,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   showLabels: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   smooth: {
     howUse: "",
@@ -3012,8 +3043,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   maxRows: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [undefined, 1, 2, 3],
+    type: "freeValues",
   },
   noResize: {
     howUse: "",

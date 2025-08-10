@@ -40,6 +40,8 @@ const wrapperVApp = computed(() => {
     "VMain",
   ].includes(ComponentName);
 });
+
+console.log("==============>", propsSchema.value);
 </script>
 
 <template>
