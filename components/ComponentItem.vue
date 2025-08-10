@@ -38,7 +38,48 @@ const getVuetifyComponentName = (element: HTMLElement) => {
   return "";
 };
 
-function getDomAsJson(element: HTMLElement, figmaLayerName: string): LayerInfo {
+function getStyles(element: HTMLElement) {
+  const computedStyle: CSSStyleDeclaration = window.getComputedStyle(element);
+  return {
+    position: computedStyle.position,
+    x: computedStyle.left,
+    y: computedStyle.top,
+    display: computedStyle.display,
+    margin: computedStyle.margin,
+    marginLeft: computedStyle.marginLeft,
+    marginRight: computedStyle.marginRight,
+    marginTop: computedStyle.marginTop,
+    marginBottom: computedStyle.marginBottom,
+    padding: computedStyle.padding,
+    paddingLeft: computedStyle.paddingLeft,
+    paddingRight: computedStyle.paddingRight,
+    paddingTop: computedStyle.paddingTop,
+    paddingBottom: computedStyle.paddingBottom,
+    gap: computedStyle.gap,
+    flexDirection: computedStyle.flexDirection,
+    width: computedStyle.width,
+    minWidth: computedStyle.minWidth,
+    maxWidth: computedStyle.maxWidth,
+    height: computedStyle.height,
+    minHeight: computedStyle.minHeight,
+    maxHeight: computedStyle.maxHeight,
+    alignItems: computedStyle.alignItems,
+    justifyContent: computedStyle.justifyContent,
+    opacity: computedStyle.opacity,
+    border: computedStyle.border,
+    borderWidth: computedStyle.borderWidth,
+    borderColor: computedStyle.borderColor,
+    borderStyle: computedStyle.borderStyle,
+    borderRadius: computedStyle.borderRadius,
+    background: computedStyle.background,
+    backgroundColor: computedStyle.backgroundColor,
+    color: computedStyle.color,
+    boxShadow: computedStyle.boxShadow,
+    zIndex: computedStyle.zIndex,
+  };
+}
+
+function getTextContent(element: HTMLElement) {
   const computedStyle: CSSStyleDeclaration = window.getComputedStyle(element);
 
   let directText: string = "";
@@ -48,60 +89,28 @@ function getDomAsJson(element: HTMLElement, figmaLayerName: string): LayerInfo {
     }
   }
 
+  return {
+    text: directText,
+    fontFamily: computedStyle.fontFamily,
+    fontSize: computedStyle.fontSize,
+    fontWeight: computedStyle.fontWeight,
+    lineHeight: computedStyle.lineHeight,
+    letterSpacing: computedStyle.letterSpacing,
+    color: computedStyle.color,
+    textTransform: computedStyle.textTransform,
+    textAlign: computedStyle.textAlign,
+  };
+}
+
+function getDomAsJson(element: HTMLElement, figmaLayerName: string): LayerInfo {
   const result: LayerInfo = {
     id: element.id || "",
     isVuetifyComponent: false,
     tagName: element.tagName.toLowerCase(),
     figmaLayerName,
     className: element.className || "",
-    textContent: {
-      text: directText,
-      fontFamily: computedStyle.fontFamily,
-      fontSize: computedStyle.fontSize,
-      fontWeight: computedStyle.fontWeight,
-      lineHeight: computedStyle.lineHeight,
-      letterSpacing: computedStyle.letterSpacing,
-      color: computedStyle.color,
-      textTransform: computedStyle.textTransform,
-      textAlign: computedStyle.textAlign,
-    },
-    styles: {
-      position: computedStyle.position,
-      x: computedStyle.left,
-      y: computedStyle.top,
-      display: computedStyle.display,
-      margin: computedStyle.margin,
-      marginLeft: computedStyle.marginLeft,
-      marginRight: computedStyle.marginRight,
-      marginTop: computedStyle.marginTop,
-      marginBottom: computedStyle.marginBottom,
-      padding: computedStyle.padding,
-      paddingLeft: computedStyle.paddingLeft,
-      paddingRight: computedStyle.paddingRight,
-      paddingTop: computedStyle.paddingTop,
-      paddingBottom: computedStyle.paddingBottom,
-      gap: computedStyle.gap,
-      flexDirection: computedStyle.flexDirection,
-      width: computedStyle.width,
-      minWidth: computedStyle.minWidth,
-      maxWidth: computedStyle.maxWidth,
-      height: computedStyle.height,
-      minHeight: computedStyle.minHeight,
-      maxHeight: computedStyle.maxHeight,
-      alignItems: computedStyle.alignItems,
-      justifyContent: computedStyle.justifyContent,
-      opacity: computedStyle.opacity,
-      border: computedStyle.border,
-      borderWidth: computedStyle.borderWidth,
-      borderColor: computedStyle.borderColor,
-      borderStyle: computedStyle.borderStyle,
-      borderRadius: computedStyle.borderRadius,
-      background: computedStyle.background,
-      backgroundColor: computedStyle.backgroundColor,
-      color: computedStyle.color,
-      boxShadow: computedStyle.boxShadow,
-      zIndex: computedStyle.zIndex,
-    },
+    textContent: getTextContent(element),
+    styles: getStyles(element),
     children: [],
   };
 
@@ -111,6 +120,8 @@ function getDomAsJson(element: HTMLElement, figmaLayerName: string): LayerInfo {
         figmaLayerName: kebabToPascal(getVuetifyComponentName(child)),
         isVuetifyComponent: true,
         tagName: child.tagName.toLowerCase(),
+        styles: getStyles(child),
+        textContent: getTextContent(child),
         children: [],
       });
     } else {

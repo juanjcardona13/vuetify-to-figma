@@ -361,6 +361,8 @@ export type GlobalSupportedProps = Record<
 >;
 
 export const globalIgnoreProps = [
+  "role",
+  "contentClass",
   "continuous",
   "mandatory",
   "reverse",
@@ -525,7 +527,18 @@ export const globalSupportedProps: GlobalSupportedProps = {
   type: {
     howUse:
       "In direct properties, search for 'type' and select the value you want to use",
-    values: ["success", "error", "warning", "info"],
+    values: [
+      "success",
+      "error",
+      "warning",
+      "info",
+      "text",
+      "number",
+      "password",
+      "email",
+      "tel",
+      "url",
+    ],
     type: "fixedValues",
   },
   height: {
@@ -3037,7 +3050,7 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   alignTabs: {
     howUse: "",
-    values: [undefined],
+    values: ["title", "end", "start", "center"],
     type: "fixedValues",
   },
   fixedTabs: {

@@ -17,9 +17,16 @@ const ignoreComponents = [
   "VTimePickerControls",
   "VTimePickerClock",
   "VTimePicker",
+  "VTabsWindowItem",
+  "VTabsWindow",
+  "VStepperWindowItem",
+  "VLazy",
 ];
 
 const completeComponents = [
+  "VTextarea",
+  "VTextField",
+
   "VAlert",
   "VAlertTitle",
   "VApp",
