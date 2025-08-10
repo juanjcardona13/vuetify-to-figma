@@ -381,6 +381,7 @@ export const globalIgnoreProps = [
   "baseColor",
   "autofocus",
   "autoSelectFirst",
+  "bgcolor",
 ];
 
 export const globalSupportedProps: Record<
@@ -772,39 +773,39 @@ export const globalSupportedProps: Record<
     type: "fixedValues",
   },
   centerAffix: {
-    howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    howUse: "Figma native",
+    values: [true, false],
+    type: "boolean",
   },
   chips: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   clearIcon: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["$close"],
+    type: "freeValues",
   },
   clearOnSelect: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   clearable: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   closableChips: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   closeText: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["closeText"],
+    type: "freeValues",
   },
   counter: {
     howUse: "",
