@@ -427,7 +427,16 @@ export const globalIgnoreProps = [
   "baseColor",
   "autofocus",
   "autoSelectFirst",
-  "bgcolor",
+  "bgColor",
+  "customFilter",
+  "customKeyFilter",
+  "eager",
+  "filterKeys",
+  "filterMode",
+  "itemChildren",
+  "itemProps",
+  "itemType",
+  "itemValue",
 ];
 
 export const globalSupportedProps: GlobalSupportedProps = {
@@ -963,8 +972,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   itemTitle: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["Item Title"],
+    type: "freeValues",
   },
   itemType: {
     howUse: "",
@@ -978,8 +987,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   items: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [undefined, "item 1", "item 2"],
+    type: "freeValues",
   },
   listProps: {
     howUse: "",
