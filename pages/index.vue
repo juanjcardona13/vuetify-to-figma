@@ -9,7 +9,15 @@ const vuetifyLabsComponents = Object.keys(vuetify_labs_components);
 
 const ignoreComponents = ["VVirtualScroll", "VValidation"];
 
-const completeComponents = ["VAlert", "VAlertTitle", "VApp", "VAppBar", "VBtn"];
+const completeComponents = [
+  "VAlert",
+  "VAlertTitle",
+  "VApp",
+  "VAppBar",
+  "VBtn",
+  "VAppBarNavIcon",
+  "VAppBarTitle",
+];
 </script>
 
 <template>

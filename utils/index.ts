@@ -817,8 +817,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   counter: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false, 10],
+    type: "freeValues",
   },
   counterValue: {
     howUse: "",
