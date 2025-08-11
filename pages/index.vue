@@ -25,6 +25,7 @@ const ignoreComponents = [
   "VCarouselItem",
   "VClassIcon",
   "VCode",
+  "VComponentIcon",
 ];
 
 const completeComponents = [
@@ -67,6 +68,11 @@ const completeComponents = [
   "VChip",
   "VChipGroup",
   "VCol",
+  "VColorPicker",
+  "VCombobox",
+  "VConfirmEdit",
+  "VContainer",
+  "VCounter",
 ];
 </script>
 

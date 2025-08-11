@@ -434,6 +434,7 @@ export const globalIgnoreProps = [
   // "bgColor",
   "customFilter",
   "customKeyFilter",
+  "customKeySort",
   "eager",
   "filterKeys",
   "filterMode",
@@ -459,6 +460,7 @@ export const globalIgnoreProps = [
   "defaultsTarget",
   "falseValue",
   "trueValue",
+  "delimiters",
 ];
 
 export const globalSupportedProps: GlobalSupportedProps = {
@@ -1291,7 +1293,7 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   mode: {
     howUse: "",
-    values: [undefined],
+    values: ["rgba", "rgb", "hsl", "hsla", "hex", "hexa"],
     type: "fixedValues",
   },
   activator: {
@@ -1823,77 +1825,77 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   lg: {
     howUse: "Figma native",
-    values: [true, false, "0.0", 0.0],
+    values: [true, false, "0", 0],
     type: "freeValues",
   },
   md: {
     howUse: "Figma native",
-    values: [true, false, "0.0", 0.0],
+    values: [true, false, "0", 0],
     type: "freeValues",
   },
   offsetLg: {
     howUse: "Figma native",
-    values: ["0.0", 0.0],
+    values: ["0", 0],
     type: "freeValues",
   },
   offsetMd: {
     howUse: "Figma native",
-    values: ["0.0", 0.0],
+    values: ["0", 0],
     type: "freeValues",
   },
   offsetSm: {
     howUse: "Figma native",
-    values: ["0.0", 0.0],
+    values: ["0", 0],
     type: "freeValues",
   },
   offsetXl: {
     howUse: "Figma native",
-    values: ["0.0", 0.0],
+    values: ["0", 0],
     type: "freeValues",
   },
   offsetXxl: {
     howUse: "Figma native",
-    values: ["0.0", 0.0],
+    values: ["0", 0],
     type: "freeValues",
   },
   orderLg: {
     howUse: "Figma native",
-    values: ["0.0", 0.0],
+    values: ["0", 0],
     type: "freeValues",
   },
   orderMd: {
     howUse: "Figma native",
-    values: ["0.0", 0.0],
+    values: ["0", 0],
     type: "freeValues",
   },
   orderSm: {
     howUse: "Figma native",
-    values: ["0.0", 0.0],
+    values: ["0", 0],
     type: "freeValues",
   },
   orderXl: {
     howUse: "",
-    values: ["0.0", 0.0],
+    values: ["0", 0],
     type: "freeValues",
   },
   orderXxl: {
     howUse: "Figma native",
-    values: ["0.0", 0.0],
+    values: ["0", 0],
     type: "freeValues",
   },
   sm: {
     howUse: "Figma native",
-    values: [true, false, "0.0", 0.0],
+    values: [true, false, "0", 0],
     type: "fixedValues",
   },
   xl: {
     howUse: "Figma native",
-    values: [true, false, "0.0", 0.0],
+    values: [true, false, "0", 0],
     type: "fixedValues",
   },
   xxl: {
     howUse: "Figma native",
-    values: [true, false, "0.0", 0.0],
+    values: [true, false, "0", 0],
     type: "fixedValues",
   },
   appendInnerIcon: {
@@ -1903,8 +1905,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   cancelText: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["Cancel Text"],
+    type: "freeValues",
   },
   canvasHeight: {
     howUse: "Figma native",
@@ -1923,8 +1925,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   hideActions: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   hideCanvas: {
     howUse: "",
@@ -1948,13 +1950,13 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   modes: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["rgba", "rgb", "hsl", "hsla", "hex", "hexa"],
+    type: "freeValues",
   },
   okText: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["OK Text"],
+    type: "freeValues",
   },
   pip: {
     howUse: "",
@@ -1973,13 +1975,13 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   swatches: {
     howUse: "",
-    values: [undefined],
+    values: ["0", 0],
     type: "fixedValues",
   },
   swatchesMaxHeight: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [undefined, 150],
+    type: "freeValues",
   },
   delimiters: {
     howUse: "",
@@ -1987,9 +1989,9 @@ export const globalSupportedProps: GlobalSupportedProps = {
     type: "fixedValues",
   },
   fluid: {
-    howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    howUse: "Figma native",
+    values: [true, false],
+    type: "boolean",
   },
   customKeySort: {
     howUse: "",
@@ -2003,8 +2005,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   expanded: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [["items"]],
+    type: "freeValues",
   },
   groupBy: {
     howUse: "",
