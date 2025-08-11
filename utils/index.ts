@@ -1023,7 +1023,7 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   items: {
     howUse: "",
-    values: [undefined, "Item 1", "Item 2"],
+    values: [undefined, ["Item 1", "Item 2"]],
     type: "freeValues",
   },
   listProps: {
