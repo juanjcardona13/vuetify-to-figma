@@ -361,6 +361,8 @@ export type GlobalSupportedProps = Record<
 >;
 
 export const globalIgnoreProps = [
+  "clickable",
+  "max",
   "role",
   "contentClass",
   "continuous",
@@ -416,7 +418,7 @@ export const globalIgnoreProps = [
   "value",
   "closeLabel",
   "iconSizes",
-  "modelValue",
+  // "modelValue",
   "position",
   "absolute",
   "floating",
@@ -429,7 +431,7 @@ export const globalIgnoreProps = [
   "baseColor",
   "autofocus",
   "autoSelectFirst",
-  "bgColor",
+  // "bgColor",
   "customFilter",
   "customKeyFilter",
   "eager",
@@ -679,7 +681,7 @@ export const globalSupportedProps: GlobalSupportedProps = {
   modelValue: {
     howUse: "",
     values: [undefined],
-    type: "fixedValues",
+    type: "freeValues",
   },
   position: {
     howUse: "",
@@ -843,7 +845,15 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   bgColor: {
     howUse: "",
-    values: ["primary", "secondary", "success", "info", "warning", "error"],
+    values: [
+      "default",
+      "primary",
+      "secondary",
+      "success",
+      "info",
+      "warning",
+      "error",
+    ],
     type: "fixedValues",
   },
   centerAffix: {
@@ -1351,8 +1361,25 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   opacity: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [
+      undefined,
+      10,
+      20,
+      30,
+      40,
+      0,
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      1,
+    ],
+    type: "freeValues",
   },
   openDelay: {
     howUse: "",
@@ -1576,28 +1603,28 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   appendAvatar: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["https://cdn.vuetifyjs.com/images/parallax/material.jpg"],
+    type: "freeValues",
   },
   hover: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   link: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   prependAvatar: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["https://cdn.vuetifyjs.com/images/parallax/material.jpg"],
+    type: "freeValues",
   },
   subtitle: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["Subtitle"],
+    type: "freeValues",
   },
   continuous: {
     howUse: "",
@@ -1616,13 +1643,13 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   hideDelimiterBackground: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   hideDelimiters: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   progress: {
     howUse: "",
@@ -1731,8 +1758,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   indeterminate: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   indeterminateIcon: {
     howUse: "",
@@ -2141,8 +2168,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   striped: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   item: {
     howUse: "",
@@ -2721,8 +2748,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   bgOpacity: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [undefined, 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+    type: "freeValues",
   },
   bufferColor: {
     howUse: "",
@@ -2731,13 +2758,13 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   bufferOpacity: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [undefined, 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+    type: "freeValues",
   },
   bufferValue: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [undefined, 30],
+    type: "freeValues",
   },
   clickable: {
     howUse: "",
@@ -2746,13 +2773,13 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   roundedBar: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   stream: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   pullDownThreshold: {
     howUse: "",
