@@ -22,6 +22,9 @@ const ignoreComponents = [
   "VStepperWindowItem",
   "VLazy",
   "VBottomSheet",
+  "VCarouselItem",
+  "VClassIcon",
+  "VCode",
 ];
 
 const completeComponents = [
@@ -47,6 +50,23 @@ const completeComponents = [
   "VBannerText",
   "VBannerActions",
   "VBottomNavigation",
+  "VBreadcrumbs",
+  "VBreadcrumbsDivider",
+  "VBreadcrumbsItem",
+  "VBtnGroup",
+  "VBtnToggle",
+  "VCard",
+  "VCardActions",
+  "VCardItem",
+  "VCardSubtitle",
+  "VCardTitle",
+  "VCardText",
+  "VCarousel",
+  "VCheckbox",
+  "VCheckboxBtn",
+  "VChip",
+  "VChipGroup",
+  "VCol",
 ];
 </script>
 
