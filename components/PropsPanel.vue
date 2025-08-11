@@ -49,6 +49,14 @@ const getFreeValueText = (propKey: string): string => {
 const setFreeValueText = (propKey: string, value: string): void => {
   updateSelectedValues(propKey, [value]);
 };
+
+const filteredComponentPropsList = computed(() =>
+  search.value
+    ? props.componentPropsList.filter((item) =>
+        item.name.toLowerCase().includes(search.value.toLowerCase())
+      )
+    : props.componentPropsList
+);
 </script>
 
 <template>
@@ -59,7 +67,7 @@ const setFreeValueText = (propKey: string, value: string): void => {
     <VSheet max-height="500" class="overflow-y-auto">
       <VExpansionPanels variant="accordion" multiple>
         <VExpansionPanel
-          v-for="item in componentPropsList"
+          v-for="item in filteredComponentPropsList"
           :key="item.name"
           :readonly="!item.supported"
           :collapse-icon="item.supported ? '$collapse' : ''"
