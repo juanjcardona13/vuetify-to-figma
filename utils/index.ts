@@ -461,6 +461,12 @@ export const globalIgnoreProps = [
   "falseValue",
   "trueValue",
   "delimiters",
+  "sortBy",
+  "expanded",
+  "groupBy",
+  "itemSelectable",
+  "cellProps",
+  "headerProps",
 ];
 
 export const globalSupportedProps: GlobalSupportedProps = {
@@ -2022,27 +2028,27 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   itemsPerPage: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["5", 5],
+    type: "freeValues",
   },
   multiSort: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   mustSort: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   page: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["1", 1],
+    type: "freeValues",
   },
   selectStrategy: {
     howUse: "",
-    values: [undefined],
+    values: ["page", "single", "all"],
     type: "fixedValues",
   },
   showExpand: {
@@ -2067,8 +2073,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   disableSort: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   firstIcon: {
     howUse: "",
@@ -2077,18 +2083,18 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   firstPageLabel: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["Label for first page"],
+    type: "freeValues",
   },
   fixedFooter: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   fixedHeader: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   headerProps: {
     howUse: "",

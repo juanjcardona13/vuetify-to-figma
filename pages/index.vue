@@ -73,6 +73,7 @@ const completeComponents = [
   "VConfirmEdit",
   "VContainer",
   "VCounter",
+  "VDataIterator",
 ];
 </script>
 
