@@ -531,7 +531,9 @@ export const globalSupportedProps: GlobalSupportedProps = {
   text: {
     howUse:
       "In direct properties, search for 'text' and write the value you want to use",
-    values: ["button"],
+    values: [
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!",
+    ],
     type: "freeValues",
   },
   label: {

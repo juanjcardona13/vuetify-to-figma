@@ -57,10 +57,19 @@ console.log("==============>", propsSchema.value);
       :definitions-props="globalSupportedProps"
       :ignore-props="globalIgnoreProps"
       :initial-props-to-show="['text']"
+      :initial-num-columns="7"
       :wrapper-v-app="wrapperVApp"
     >
       <template #component="{ combination }">
-        <component :is="ComponentName" v-bind="{ ...combination.props }" />
+        <component :is="ComponentName" v-bind="{ ...combination.props }">
+          <template #actions>
+            <VBtn text="button" />
+            <VBtn text="button" />
+            <VBtn text="button" />
+            <VBtn text="button" />
+            <VBtn text="button" />
+          </template>
+        </component>
       </template>
     </ComponentPlayground>
   </div>
