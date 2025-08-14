@@ -57,7 +57,7 @@ console.log("==============>", propsSchema.value);
       :component-name="ComponentName"
       :component-props="propsSchema"
       :definitions-props="globalSupportedProps"
-      :ignore-props="globalIgnoreProps"
+      :ignore-props="Array.from(globalIgnoreProps)"
       :initial-props-to-show="['length']"
       :initial-num-columns="12"
       :wrapper-v-app="wrapperVApp"
