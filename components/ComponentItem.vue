@@ -102,7 +102,12 @@ function getTextContent(element: HTMLElement) {
   };
 }
 
-function getDomAsJson(element: HTMLElement, figmaLayerName: string): LayerInfo {
+function getDomAsJson(
+  element: HTMLElement,
+  figmaLayerName: string
+): LayerInfo | undefined {
+  if (!element) return undefined;
+
   const result: LayerInfo = {
     id: element.id || "",
     isVuetifyComponent: false,
@@ -125,7 +130,10 @@ function getDomAsJson(element: HTMLElement, figmaLayerName: string): LayerInfo {
         children: [],
       });
     } else {
-      result.children.push(getDomAsJson(child, getFigmaLayerName(child)));
+      const childResult = getDomAsJson(child, getFigmaLayerName(child));
+      if (childResult) {
+        result.children.push(childResult);
+      }
     }
   }
 

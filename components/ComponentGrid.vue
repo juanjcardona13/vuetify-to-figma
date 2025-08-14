@@ -68,7 +68,7 @@ const applyVAppWrapper = () => {
           v-for="(realCombination, i) in paginatedCombinations"
           :key="i"
         >
-          <VCol :cols="numColumns">
+          <VCol :cols="numColumns" class="position-relative relative">
             <ComponentItem
               :id="`combination-${i}`"
               ref="componentItems"
