@@ -429,7 +429,6 @@ export const globalIgnoreProps = [
   "scrollThreshold",
   "activeColor",
   "baseColor",
-  "autofocus",
   "autoSelectFirst",
   // "bgColor",
   "customFilter",
@@ -467,6 +466,22 @@ export const globalIgnoreProps = [
   "itemSelectable",
   "cellProps",
   "headerProps",
+  "activated",
+  "activeStrategy",
+  "activatable",
+  "opened",
+  "openStrategy",
+  "selected",
+  "selectable",
+  "rawId",
+  "attach",
+  "closeDelay",
+  "closeOnBack",
+  "closeOnContentClick",
+  "contentProps",
+  "disableRouteWatcher",
+  "expandOnHover",
+  "openDelay",
 ];
 
 export const globalSupportedProps: GlobalSupportedProps = {
@@ -1333,9 +1348,9 @@ export const globalSupportedProps: GlobalSupportedProps = {
     type: "fixedValues",
   },
   contained: {
-    howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    howUse: "Figma native",
+    values: [true, false],
+    type: "boolean",
   },
   contentClass: {
     howUse: "",
@@ -1354,8 +1369,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   inset: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   locationStrategy: {
     howUse: "",
@@ -1421,8 +1436,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   persistent: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   retainFocus: {
     howUse: "",
@@ -1431,8 +1446,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   scrim: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   scrollStrategy: {
     howUse: "",
@@ -1441,8 +1456,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   scrollable: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   target: {
     howUse: "",
@@ -1546,8 +1561,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   min: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [-9007199254740991],
+    type: "freeValues",
   },
   month: {
     howUse: "",
@@ -2376,8 +2391,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   hideInput: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   showSize: {
     howUse: "",
@@ -2411,8 +2426,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   nav: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   fastFail: {
     howUse: "",
@@ -2486,8 +2501,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   activatable: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   activated: {
     howUse: "",
@@ -2501,8 +2516,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   filterable: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   openStrategy: {
     howUse: "",
@@ -2531,23 +2546,23 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   subgroup: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   fallbackLocale: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["String"],
+    type: "freeValues",
   },
   locale: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["String"],
+    type: "freeValues",
   },
   rtl: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   mask: {
     howUse: "",
@@ -2570,9 +2585,9 @@ export const globalSupportedProps: GlobalSupportedProps = {
     type: "fixedValues",
   },
   disableResizeWatcher: {
-    howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    howUse: "Figma native",
+    values: [true, false],
+    type: "boolean",
   },
   disableRouteWatcher: {
     howUse: "",
@@ -2586,23 +2601,23 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   permanent: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   rail: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   railWidth: {
-    howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    howUse: "Figma native",
+    values: ["56", 56],
+    type: "freeValues",
   },
   temporary: {
-    howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    howUse: "Figma native",
+    values: [true, false],
+    type: "boolean",
   },
   touchless: {
     howUse: "",
@@ -2611,28 +2626,28 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   controlVariant: {
     howUse: "",
-    values: [undefined],
+    values: ["default", "split", "hidden", "stacked"],
     type: "fixedValues",
   },
   decimalSeparator: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [",", "."],
+    type: "freeValues",
   },
   minFractionDigits: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [0],
+    type: "freeValues",
   },
   precision: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [0],
+    type: "freeValues",
   },
   step: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [1],
+    type: "freeValues",
   },
   focusAll: {
     howUse: "",

@@ -26,6 +26,8 @@ const ignoreComponents = [
   "VClassIcon",
   "VCode",
   "VComponentIcon",
+  "VMenu",
+  "VNoSsr",
 ];
 
 const completeComponents = [
@@ -74,6 +76,19 @@ const completeComponents = [
   "VContainer",
   "VCounter",
   "VDataIterator",
+  "VList",
+  "VListGroup",
+  "VListImg",
+  "VListItem",
+  "VListItemAction",
+  "VListItemMedia",
+  "VListItemSubtitle",
+  "VListItemTitle",
+  "VListSubheader",
+  "VLocaleProvider",
+  "VMain",
+  "VMessages",
+  "VNavigationDrawer",
 ];
 </script>
 
