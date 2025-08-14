@@ -37,6 +37,8 @@ const wrapperVApp = computed(() => {
     "VAppBar",
     "VContainer",
     "VFooter",
+    "VNavigationDrawer",
+    "VFooter",
     "VMain",
   ].includes(ComponentName);
 });
