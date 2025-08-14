@@ -361,6 +361,122 @@ export type GlobalSupportedProps = Record<
 >;
 
 export const globalIgnoreProps = [
+  // // makeDataTableGroupProps
+  // "groupBy",
+  // // makeDataTableHeaderProps
+  // "headers",
+  // // makeDataTableItemsProps
+  // "items",
+  // "itemValue",
+  // "itemSelectable",
+  // "rowProps",
+  // "cellProps",
+  // "returnObject",
+  // // makeDataTableSelectProps
+  // "showSelect",
+  // "selectStrategy",
+  // "modelValue",
+  // "valueComparator",
+  // // makeDataTableSortProps
+  // "sortBy",
+  // "customKeySort",
+  // "multiSort",
+  // "mustSort",
+  // // makeComponentProps
+  // "class",
+  // "style",
+  // // makeDensityProps
+  // "density",
+  // // makeTagProps
+  // "tag",
+  // // makeThemeProps
+  // "theme",
+  // // makeDataTableExpandProps
+  // "expandOnClick",
+  // "showExpand",
+  // "expanded",
+  // // makeDataTablePaginateProps
+  // "page",
+  // "itemsPerPage",
+  // // makeFilterProps
+  // "customFilter",
+  // "customKeyFilter",
+  // "filterKeys",
+  // "filterMode",
+  // "noFilter",
+  // // VTable
+  // "fixedHeader",
+  // "fixedFooter",
+  // "height",
+  // "hover",
+  // "striped",
+  // // VDataTable
+  // "hideDefaultBody",
+  // "hideDefaultFooter",
+  // "hideDefaultHeader",
+  // "width",
+  // "search",
+  // // VDataTableFooter
+  // "prevIcon",
+  // "nextIcon",
+  // "firstIcon",
+  // "lastIcon",
+  // "itemsPerPageText",
+  // "pageText",
+  // "firstPageLabel",
+  // "prevPageLabel",
+  // "nextPageLabel",
+  // "lastPageLabel",
+  // "itemsPerPageOptions",
+  // "showCurrentPage",
+  // // VDataTableColumn
+  // "align",
+  // "fixed",
+  // "fixedOffset",
+  // "fixedEndOffset",
+  // "height",
+  // "lastFixed",
+  // "firstFixedEnd",
+  // "noPadding",
+  // "tag",
+  // "width",
+  // "maxWidth",
+  // "nowrap",
+  // // VDataTableGroupHeaderRow
+  // "item",
+  // // VDataTableHeaders
+  // "color",
+  // "disableSort",
+  // "fixedHeader",
+  // "multiSort",
+  // "sortAscIcon",
+  // "sortDescIcon",
+  // "headerProps",
+  // "sticky",
+  // "mobile",
+  // "mobileBreakpoint",
+  // "loading",
+  // // VDataTableRow
+  // "index",
+  // "item",
+  // "cellProps",
+  // "onClick",
+  // "onContextmenu",
+  // "onDblclick",
+  // "mobile",
+  // "mobileBreakpoint",
+  // // VDataTableRows
+  // "loading",
+  // "loadingText",
+  // "hideNoData",
+  // "items",
+  // "noDataText",
+  // "rowProps",
+  // "cellProps",
+  // "mobile",
+  // "mobileBreakpoint",
+
+  "disableSort",
   "clickable",
   "max",
   "role",
@@ -467,6 +583,28 @@ export const globalIgnoreProps = [
   "itemSelectable",
   "cellProps",
   "headerProps",
+  "ariaLabel",
+  "currentPageAriaLabel",
+  "itemsPerPageAriaLabel",
+  "pageAriaLabel",
+  "totalItemsAriaLabel",
+  "totalPagesAriaLabel",
+  "firstAriaLabel",
+  "lastAriaLabel",
+  "nextAriaLabel",
+  "previousAriaLabel",
+  "attach",
+  "contentProps",
+  "_disableGlobalStack",
+  "offset",
+  "openDelay",
+  "persistent",
+  "scrollStrategy",
+  "target",
+  "zIndex",
+  "origin",
+  "disableInitialFocus",
+  "submenu",
 ];
 
 export const globalSupportedProps: GlobalSupportedProps = {
@@ -695,7 +833,7 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   modelValue: {
     howUse: "",
-    values: [undefined],
+    values: [undefined, true, false],
     type: "freeValues",
   },
   position: {
@@ -1336,8 +1474,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   contained: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [true, false],
+    type: "boolean",
   },
   contentClass: {
     howUse: "",
@@ -1433,8 +1571,17 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   scrim: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [
+      true,
+      false,
+      "primary",
+      "secondary",
+      "error",
+      "warning",
+      "info",
+      "success",
+    ],
+    type: "freeValues",
   },
   scrollStrategy: {
     howUse: "",
@@ -2298,8 +2445,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   length: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [10],
+    type: "freeValues",
   },
   thickness: {
     howUse: "",
@@ -2653,8 +2800,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   ellipsis: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: ["...", "…", "#"],
+    type: "freeValues",
   },
   firstAriaLabel: {
     howUse: "",
@@ -2688,8 +2835,8 @@ export const globalSupportedProps: GlobalSupportedProps = {
   },
   totalVisible: {
     howUse: "",
-    values: [undefined],
-    type: "fixedValues",
+    values: [3, 5, 10],
+    type: "freeValues",
   },
   scale: {
     howUse: "",
@@ -3406,4 +3553,42 @@ export const globalSupportedProps: GlobalSupportedProps = {
     values: [undefined],
     type: "fixedValues",
   },
+};
+
+export const slotsDataTable = {
+  top: "Slot to add content above the table.",
+  thead: "Slot to replace the default table <thead>.",
+  "body.append": "Appends elements to the end of the default table <tbody>.",
+  tbody: "Slot to replace the default table <tbody>.",
+  body: "Slot to replace the default table <tbody>.",
+  "body.prepend":
+    "Prepends elements to the start of the default table <tbody>.",
+  default: "The default Vue slot.",
+  tfoot: "Slot to replace the default table <tfoot>.",
+  "footer.prepend": "Adds content to the empty space in the footer.",
+  bottom: "Slot for custom rendering of a data table footer.",
+
+  headers: "An array of objects that each describe a header column.",
+  loading:
+    "Defines content for when loading is true and no items are provided.",
+  "no-data": "Defines content for when no items are provided.",
+  "[`header.${string}`]": "Slot for custom rendering of a header cell.",
+  "[`item.${string}`]": "Slot for custom rendering of a row cell.",
+  colgroup: "Slot to replace the default rendering of the <colgroup> element.",
+  "data-table-group": "Slot for custom rendering of a group.",
+  "data-table-select":
+    "Slot for custom rendering of a header cell with the select checkbox.",
+  "expanded-row": "Slot for custom rendering of an expanded row.",
+  "group-header": "Slot for custom rendering of a group header.",
+  "header.data-table-expand":
+    "Slot to replace the default v-icon used when expanding header.",
+  "header.data-table-select":
+    "Slot to replace the default v-checkbox-btn in header.",
+  item: "Slot to replace the default rendering of a row.",
+  "item.data-table-expand":
+    "Slot to replace the default v-icon used when expanding rows.",
+  "item.data-table-select":
+    "Slot to replace the default v-checkbox-btn used when selecting rows.",
+  loader:
+    "Slot for custom loader (displayed when loading prop is equal to true).",
 };
